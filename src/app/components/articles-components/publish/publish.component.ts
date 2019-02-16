@@ -12,6 +12,10 @@ import {Router} from "@angular/router";
     templateUrl: './publish.component.html',
     styleUrls: ['./publish.component.css']
 })
+/**
+ * Main publishing component, that containt the method to publish the article in the databse
+ * Must use subcomponents to supply article info such as AddArticleComponent
+ */
 export class PublishComponent implements OnInit {
 
     user: User;
