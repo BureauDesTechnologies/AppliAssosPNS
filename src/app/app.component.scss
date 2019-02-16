@@ -1,0 +1,335 @@
+//Centers content
+.mainWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-content: center;
+  justify-content: center;
+}
+
+header {
+  display: block;
+}
+
+mat-sidenav-container {
+  flex: 1;
+}
+
+//Set mat-sidenav to always appear
+mat-sidenav {
+  position: fixed;
+  background-color: #004878;
+}
+
+a .assoName {
+  visibility: hidden;
+}
+
+//Only show asso's name when hovering the logo
+//Add , .active + .assoName to enable text permanently when selected
+a:hover .assoName {
+  visibility: visible !important;
+}
+
+.menuItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  display: block;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+}
+
+.logos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: calc(100vh - 16px);
+  margin: 8px auto;
+}
+
+//Remove text decoration from <a>
+mat-sidenav a, mat-sidenav a:hover, .assoName {
+  color: white;
+  text-decoration: none;
+  font-size: smaller;
+  margin: auto 4px;
+}
+
+//Override Bootstrap attribute as it is used on header
+.bg-dark {
+  background: #00aeef !important; //header background color
+}
+
+.nav-link:hover {
+  color: #004878 !important; //Color on header text when hovered
+}
+
+.nav-link {
+  color: white !important; //Default text color of the header
+  transition: all .3s; //Use beacause of the color transition when hovering
+  text-align: center;
+}
+
+.assoName {
+  max-width: 100px;
+  text-align: center;
+}
+
+.assoName p {
+  margin: 0;
+}
+
+//Assos and src
+//Active is a class added when this is the current view
+//BDE
+a .bde {
+  background: url('../assets/logoAssos/logoBDEblanc.png') center no-repeat;
+  background-size: contain;
+}
+
+a:hover .bde, a .bde.active {
+  background: url('../assets/logoAssos/logoBDE.png') center no-repeat;
+  background-size: contain;
+}
+
+/*BDS*/
+a .bds {
+  background: url('../assets/logoAssos/logoBDSblanc.png') center no-repeat;
+  background-size: contain;
+}
+
+a:hover .bds, a .bds.active {
+  background: url('../assets/logoAssos/logoBDS.png') center no-repeat;
+  background-size: contain;
+}
+
+/*BDC*/
+a .bdc {
+  background: url('../assets/logoAssos/logoBlanc.png') center no-repeat;
+  background-size: contain;
+}
+
+a:hover .bdc, a .bdc.active {
+  background: url('../assets/logoAssos/logoBDC.png') center no-repeat;
+  background-size: contain;
+}
+
+/*BDJ*/
+a .bdj {
+  background: url('../assets/logoAssos/logoBDJblanc.png') center no-repeat;
+  background-size: contain;
+}
+
+a:hover .bdj, a .bdj.active {
+  background: url('../assets/logoAssos/logoBDJ.png') center no-repeat;
+  background-size: contain;
+}
+
+/*BDA*/
+a .bda {
+  background: url('../assets/logoAssos/logoBDAblanc.png') center no-repeat;
+  background-size: contain;
+}
+
+a:hover .bda, a .bda.active {
+  background: url('../assets/logoAssos/logoBDA.png') center no-repeat;
+  background-size: contain;
+}
+
+/*PNC*/
+a .pnc {
+  background: url('../assets/logoAssos/logoPNCblanc.png') center no-repeat;
+  background-size: contain;
+}
+
+a:hover .pnc, a .pnc.active {
+  background: url('../assets/logoAssos/logoPNC.png') center no-repeat;
+  background-size: contain;
+}
+
+/*BDH*/
+a .bdh {
+  background: url('../assets/logoAssos/logoBDHEblanc.png') center no-repeat;
+  background-size: contain;
+}
+
+a:hover .bdh, a .bdh.active {
+  background: url('../assets/logoAssos/logoBDHE.png') center no-repeat;
+  background-size: contain;
+}
+
+a:hover .logo {
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.55));
+}
+
+
+/*footer {
+  background: #494949;
+  text-align: center;
+  margin-left: 116px;
+  padding: 8px auto;
+}
+
+footer p {
+  margin: 4px auto;
+}
+
+footer a, footer a:visited, footer {
+  color: white;
+  text-decoration: none;
+}
+
+footer a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}*/
+
+/*region Responsive*/
+//This class is used to hide things only if the height is higher than a certain amount.
+.tooSmallHeight {
+  display: none;
+}
+
+//.mobile is a class used to only shows when "responsive" view is enable, such as on mobile screen
+header nav.mobile {
+  display: none;
+}
+
+header nav.mobile mat-icon {
+  color: white;
+  margin: 4px;
+  cursor: pointer;
+}
+
+.headerMobile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.mobileMenu {
+  position: absolute;
+  align-self: baseline;
+
+  min-width: 150px;
+  padding: 8px;
+  z-index: 2;
+  background: #003c6c !important;
+  box-shadow: 0 0 6px 0 #001422 !important;
+  right: 8px;
+}
+
+.mobileMenu ul {
+  flex-direction: column; //Display the list on one line
+}
+
+//region Component use when the sidenav can't be displayed
+.assoChoiceMobileWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  z-index: 2;
+  background: #001422;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.assoChoiceMobile {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 8px;
+}
+
+.assoChoiceMobileWrapper mat-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.assoChoiceMobile .menuItem {
+  margin: 24px;
+}
+
+.assoChoiceMobile a:hover {
+  transform: scale(1.1);
+  transition: all .3s linear;
+  text-decoration: none;
+}
+
+.assoChoiceMobile .menuItem .assoName {
+  visibility: visible !important;
+}
+
+//endregion
+
+@media (max-height: 500px) and (min-width: 735px) {
+  mat-sidenav {
+    display: none;
+  }
+
+  mat-sidenav-content {
+    margin-left: 0 !important;
+  }
+
+  footer {
+    margin: 0;
+  }
+
+  .tooSmallHeight {
+    display: inherit !important;
+    padding: 0;
+  }
+
+  .tooSmallHeightHide {
+    display: none !important;
+  }
+}
+
+@media (max-width: 734px) {
+  mat-sidenav {
+    display: none;
+  }
+
+  mat-sidenav-content {
+    margin-left: 0 !important;
+  }
+
+  footer {
+    margin: 0;
+  }
+
+  /*735px min for header too, hidePwd his content if less*/
+  header nav.desktop {
+    display: none;
+  }
+
+  header nav.mobile {
+    display: flex;
+  }
+}
+
+@media (min-width: 735px) and (min-height: 500px) {
+  mat-sidenav-content {
+    margin-left: 116px !important;
+  }
+
+  footer {
+    margin-left: 116px;
+  }
+}
+
+/*endregion*/
