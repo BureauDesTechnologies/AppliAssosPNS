@@ -15,6 +15,11 @@ export class ArticleService {
     constructor(private st: AngularFireStorage) {
     }
 
+    /**
+     * Retrieve the link of the image on a article
+     * @param article with imageUrl supplied
+     * @throws Error if article.imageUrl is null, undefined or equals ''
+     */
     async getDownloadImageUrl(article: Article): Promise<string> {
         if (article.imageUrl === '' || (article.imageUrl === null || article.imageUrl === undefined)) {
             throw Error("You should not try to load download url on a article without imageUrl");
@@ -24,6 +29,10 @@ export class ArticleService {
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Add article in the database
+     * @param article with title, content, category, imageUrl
+     */
     addArticle(article: Article) {
         return firestore().collection('Articles').add({
             title: article.title,
@@ -35,11 +44,20 @@ export class ArticleService {
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Remove article
+     * @param article with id supplied
+     */
     deleteArticle(article: Article) {
         return firestore().collection('Articles').doc(article.id).delete();
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Add a fav on the article, add the user.id in the article fav collection
+     * @param article with id supplied
+     * @param user with id supplied
+     */
     favArticle(article: Article, user: User) {
         article.favorite.add(user.userId);
         firestore().collection('Articles').doc(article.id).update({
@@ -48,6 +66,11 @@ export class ArticleService {
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Add a clap on the article, add the user.id in the article clap collection
+     * @param article with id supplied
+     * @param user with id supplied
+     */
     clapArticle(article: Article, user: User) {
         article.clap.add(user.userId);
         firestore().collection('Articles').doc(article.id).update({
@@ -56,6 +79,11 @@ export class ArticleService {
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Remove a fav in the article list, use with caution, can cause a unsynchronous call that override a value
+     * @param article with id supplied
+     * @param user with id supplied
+     */
     unfavArticle(article: Article, user: User) {
         article.favorite.delete(user.userId);
         firestore().collection('Articles').doc(article.id).update({
@@ -64,6 +92,11 @@ export class ArticleService {
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Remove a clap in the article list, use with caution, can cause a unsynchronous call that override a value
+     * @param article with id supplied
+     * @param user with id supplied
+     */
     unclapArticle(article: Article, user: User) {
         article.clap.delete(user.userId);
         firestore().collection('Articles').doc(article.id).update({
@@ -71,6 +104,12 @@ export class ArticleService {
         });
     }
 
+    /**
+     * Post comment on an articlr
+     * @param article
+     * @param author
+     * @param comment
+     */
     async postComment(article: Article, author: User, comment: string): Promise<void> {
         // Load previous comments to avoid override
         await this.loadComments(article);
@@ -91,6 +130,10 @@ export class ArticleService {
         }, {merge: true});
     }
 
+    /**
+     * Load comments on a article, and supplies it
+     * @param article
+     */
     async loadComments(article: Article) {
         if ((article.comments === null || article.comments === undefined)) {
             article.comments = new Set();
@@ -109,6 +152,10 @@ export class ArticleService {
         return Promise.all(requests);
     }
 
+    /**
+     * Fetch all articles
+     * No limit in data
+     */
     async getAllArticles(): Promise<Article[]> {
         const articles = [];
         const docs = await firestore().collection('Articles').orderBy('creation', "desc").limit(10).get();
@@ -122,6 +169,10 @@ export class ArticleService {
         return Promise.resolve(articles);
     }
 
+    /**
+     * Retrieve all articles with a specified category (asso)
+     * @param category
+     */
     async getAllArticlesOf(category: string): Promise<Article[]> {
         const articles = [];
         const docs = await firestore().collection('Articles')
@@ -139,12 +190,20 @@ export class ArticleService {
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Use on the home view to retrieve articles when posted without refreshing the page
+     * @param whatToDoWithArticles callback with the DocumentReference
+     */
     streamLastArticles(whatToDoWithArticles) {
         return firestore().collection('Articles')
             .orderBy('creation', "desc").limit(10).onSnapshot(whatToDoWithArticles);
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Update an article
+     * @param article to modify with id, title and content
+     */
     updateArticle(article: Article): Promise<void> {
         return firestore().collection('Articles').doc(article.id).set({
             title: article.title,

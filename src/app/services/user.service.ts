@@ -178,6 +178,10 @@ export class UserService {
         });
     }
 
+    /**
+     * Use to track user connection
+     * @param userId
+     */
     private updateLastConnection(userId: string) {
         const timestamp = firebase.firestore.FieldValue.serverTimestamp();
         this.db.collection('Users').doc(userId).update({
@@ -187,6 +191,10 @@ export class UserService {
         });
     }
 
+    /**
+     * Retrieve data from the logged Firebase User
+     * Fetech data from DB then update last connection
+     */
     private getLoggedUserFromCache() {
         const docRef = this.db.collection('Users').doc(this.getLoggedFirebaseUser().uid).ref;
         docRef.get().then((doc) => {
@@ -197,6 +205,11 @@ export class UserService {
         });
     }
 
+    /**
+     * Register user in firestore after registered him in authentication pannel
+     * @param user with mail, firstName, lastName, photoUrl
+     * @param uid id of the user when registered
+     */
     private registerUserInDatabase(user: User, uid: string) {
         const timestamp = firebase.firestore.FieldValue.serverTimestamp();
         this.db.collection('Users').doc(uid).ref.set({
