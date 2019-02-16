@@ -1,0 +1,53 @@
+// http://ionicframework.com/docs/theming/
+@import '~@ionic/angular/css/core.css';
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+@import '~@angular/material/theming';
+@import "bootstrap";
+/*@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';*/
+//@import '~font-awesome/css/font-awesome.css';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$asso-pns-app-primary: mat-palette($mat-light-blue);
+$asso-pns-app-accent: mat-palette($mat-light-blue, A200, A100, A400);
+
+$asso-pns-app-theme: mat-light-theme($asso-pns-app-primary, $asso-pns-app-accent);
+
+@include angular-material-theme($asso-pns-app-theme);
+
+
+//body {
+//  min-height: 100vh;
+//}
+//
+//.popupSnackBar {
+//  background: transparent !important;
+//  text-align: right !important;
+//  max-width: 400px !important;
+//  padding: 0 !important;
+//  margin: 0 !important;
+//}
+//
+//.mat-snack-bar-handset {
+//  max-width: 400px !important;
+//}
+
+:root {
+  --primary-color: #00aeef;
+}
+
+

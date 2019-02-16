@@ -1,0 +1,9 @@
+<div *ngIf="isDisplayed" class="popupMascotte">
+    <div class="bubbleWrapper">
+        <div class="bubble">
+            <p>{{text}}</p>
+            <p (click)="close()" class="closeText">{{validateLabel}}</p>
+        </div>
+    </div>
+    <div class="mascotte"></div>
+</div>

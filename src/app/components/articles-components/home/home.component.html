@@ -1,0 +1,4 @@
+<div *ngFor="let article of articles">
+    <app-article-view (hasBeenDeleted)="remove(article)" [article]="article"
+                      [mustDisplayAssoName]="true"></app-article-view>
+</div>

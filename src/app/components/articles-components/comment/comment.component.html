@@ -1,0 +1,29 @@
+<div class="comment">
+    <div class="photo">
+        <div *ngIf="link !== ''" [ngStyle]="getUrl()" class="imgProfile"></div>
+    </div>
+    <div class="mainContent">
+        <div class="header">
+            <p class="name">
+                {{comment.author.firstName}} {{comment.author.lastName}}
+            </p>
+            <p class="date">Le {{comment.date | date:'dd/MM à HH:mm'}}</p>
+        </div>
+        <!--<div class="content">-->
+        <!--<p>{{comment.content}}</p>-->
+        <!--</div>-->
+        <div *ngFor="let token of tokens" class="content">
+            <p *ngIf="token.type === 0" class="articleLine"> <!-- For lines -->
+                <span *ngFor="let lineToken of token.data" style="display: contents"><!-- For each token of line -->
+                            <span *ngIf="lineToken.type == 1" style="display: contents">
+                                {{lineToken.data}}
+                            </span>
+                    <!-- if is text -->
+                            <img *ngIf="lineToken.type == 2" [alt]="lineToken.data.text" [src]="lineToken.data.url"
+                                 class="emote"> <!-- if is emote -->
+                        </span>
+                <br>
+            </p>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-card-title>Suivre
+    </mat-card-title>
+    <div class="rights">
+        <mat-checkbox (change)="changeSubscription(asso, $event)" *ngFor="let asso of assos"
+                      [checked]="subscriptions.lastIndexOf(asso) > -1"
+                      color="primary">
+            {{asso}}
+        </mat-checkbox>
+    </div>
+    <div class="buttonWrap">
+        <button (click)="validate()" color="primary" mat-raised-button>Valider</button>
+    </div>
+</mat-card>

@@ -1,0 +1,38 @@
+<div (dropped)="startUpload($event)"
+     (hovered)="toggleHover($event)"
+     [class.hovering]="isHovering"
+     class="dropzone"
+     dropZone>
+
+    <h3>{{displayedTitle}}</h3>
+    <p>{{displayedMessage}}</p>
+
+    <div class="file">
+        <label class="label-file" for="file">
+            <mat-icon>add_photo_alternate</mat-icon>
+            <!--<mat-icon>publish</mat-icon>-->
+        </label>
+        <input (change)="startUpload($event.target.files)" class="input-file" id="file" type="file">
+    </div>
+</div>
+
+<div *ngIf="percentage | async as pct" class="progressBar">
+    <progress class="progress is-info"
+              [value]="pct"
+              max="100">
+    </progress>
+</div>
+
+<div *ngIf="snapshot | async as snap">
+    {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
+    <button mat-raised-button color="primary" (click)="task.pause()" class="button is-warning"
+            [disabled]="!isActive(snap)">Pause
+    </button>
+    <button mat-raised-button color="primary" (click)="task.cancel()" class="button is-danger"
+            [disabled]="!isActive(snap)">Cancel
+    </button>
+    <button mat-raised-button color="primary" (click)="task.resume()" class="button is-info"
+            [disabled]="!(snap?.state === 'paused')">
+        Resume
+    </button>
+</div>

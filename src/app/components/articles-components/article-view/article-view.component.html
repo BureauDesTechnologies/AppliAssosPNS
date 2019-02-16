@@ -1,0 +1,105 @@
+<mat-card>
+    <form>
+        <div class="options">
+            <button (click)="edit()"
+                    *ngIf="connectedUser !== null && connectedUser.canPublishAs.includes(article.category) && !editing && !editable"
+                    class="editButton"
+                    mat-icon-button
+                    type=submit>
+                <mat-icon>create</mat-icon>
+            </button>
+            <button (click)="edit()"
+                    *ngIf="connectedUser !== null && connectedUser.canPublishAs.includes(article.category) && !editing && editable"
+                    class="editButton"
+                    mat-icon-button
+                    type=submit>
+                <mat-icon>check</mat-icon>
+            </button>
+            <button (click)="confirmDelete()"
+                    *ngIf="connectedUser !== null && connectedUser.canPublishAs.includes(article.category) && !editing && !editable"
+                    class="editButton"
+                    mat-icon-button
+                    type=submit>
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        <mat-progress-spinner *ngIf="editing" [diameter]="24" class="editing"
+                              mode="indeterminate"></mat-progress-spinner>
+        <div class="content">
+            <mat-card-title *ngIf="editable === false">{{article.title}}</mat-card-title>
+            <mat-card-title *ngIf="editable === true">
+                <mat-form-field>
+                    <input [(ngModel)]="article.title" autocomplete="off" matInput name="title" type="text">
+                </mat-form-field>
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="mustDisplayAssoName">{{article.category}}</mat-card-subtitle>
+
+            <div *ngIf="editable === false">
+                <div *ngFor="let token of tokens" class="articleContent">
+                    <p *ngIf="token.type === 0" class="articleLine"> <!-- For lines -->
+                        <span *ngFor="let lineToken of token.data" style="display: contents"><!-- For each token of line -->
+                            <span *ngIf="lineToken.type == 1" style="display: contents">
+                                {{lineToken.data}}
+                            </span>
+                            <!-- if is text -->
+                            <img *ngIf="lineToken.type == 2" [alt]="lineToken.data.text" [src]="lineToken.data.url"
+                                 class="emote"> <!-- if is emote -->
+                        </span>
+                        <br>
+                    </p>
+                </div>
+            </div>
+            <textarea *ngIf="editable === true"
+                      [(ngModel)]="article.content" autocomplete="off"
+                      name="content"
+                      placeholder="Contenu"></textarea>
+            <img *ngIf="article.downloadableImageUrl !== '' && article.downloadableImageUrl !== undefined "
+                 [src]="article.downloadableImageUrl" alt="">
+        </div>
+    </form>
+    <div class="actions">
+        <div (click)="displayOrHideComments()" class="soc">
+            <mat-icon *ngIf="!hideComments" class="comment active">chat_bubble</mat-icon>
+            <mat-icon *ngIf="hideComments" class="active">chat_bubble_outlined
+            </mat-icon>
+            <p class="amount">{{article.commentsCount}}</p>
+        </div>
+
+        <div class="soc">
+            <mat-icon (click)="unclapArticle()" *ngIf="hasBeenClap" class="clap active" svgIcon="clap"></mat-icon>
+            <mat-icon (click)="clapArticle()" *ngIf="!hasBeenClap" class="active" svgIcon="clap_outlined"></mat-icon>
+            <p class="amount">{{article.clap.size}}</p>
+        </div>
+
+        <div class="soc">
+            <mat-icon (click)="unfavArticle()" *ngIf="hasBeenFav" class="favorite active">favorite</mat-icon>
+            <mat-icon (click)="favArticle()" *ngIf="!hasBeenFav" class="active">favorite_border</mat-icon>
+            <p class="amount">{{article.favorite.size}}</p>
+        </div>
+    </div>
+    <div *ngIf="commentsLoaded && !hideComments" class="comments">
+        <mat-divider></mat-divider>
+        <div *ngIf="connectedUser !== null">
+            <form>
+                <label for="comment">Poster un commentaire</label>
+                <div>
+                    <form class="writeComment">
+                        <mat-form-field>
+                            <input [(ngModel)]="writtenComment" autocomplete="off" id="comment" matInput
+                                   name="comment"/>
+                        </mat-form-field>
+                        <button (click)="postComment()" *ngIf="writtenComment.length > 0" class="sendComButton"
+                                mat-icon-button
+                                type=submit>
+                            <mat-icon>send</mat-icon>
+                        </button>
+                    </form>
+                </div>
+            </form>
+        </div>
+        <div class="commentsContainer">
+            <app-comment *ngFor="let comment of article.getComments()"
+                         [comment]="comment"></app-comment>
+        </div>
+    </div>
+</mat-card>

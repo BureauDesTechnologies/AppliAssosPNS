@@ -1,0 +1,32 @@
+<div class="form">
+    <div class="firstForm">
+        <mat-form-field id="title">
+            <input [(ngModel)]="article.title" autocomplete="off" matInput name="title" placeholder="Titre" required
+                   type="text"/>
+            <mat-error>Ce champ doit être renseigné</mat-error>
+        </mat-form-field>
+        <mat-select (selectionChange)="article.category = $event.value" *ngIf="user.canPublishAs.length > 1"
+                    id="category"
+                    placeholder="Publier en tant que" required>
+            <mat-option *ngFor="let publishAs of user.canPublishAs" [value]="publishAs">
+                {{publishAs}}
+            </mat-option>
+        </mat-select>
+        <div *ngIf="user.canPublishAs.length === 1">
+            <p>{{user.canPublishAs[0]}}</p>
+        </div>
+    </div>
+    <mat-form-field>
+            <textarea [(ngModel)]="article.content" matInput name="content" placeholder="Contenu" required
+                      type="text"></textarea>
+        <mat-error>Ce champ doit être renseigné</mat-error>
+    </mat-form-field>
+    <app-file-upload (downloadableOn)="imageToDisplay = $event"
+                     (uploadedOnURL)="article.imageUrl = $event"
+                     *ngIf="imageToDisplay ===''"
+                     [displayedTitle]="'Ajouter une image'"
+                     [expectedType]="'image'"
+                     [subFolder]="'articleImages'"></app-file-upload>
+    <img *ngIf="imageToDisplay !== ''" [src]="imageToDisplay" alt="">
+
+</div>
