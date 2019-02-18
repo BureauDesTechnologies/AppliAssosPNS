@@ -1,5 +1,5 @@
-@import './variables';
-@import './mixins';
+@import 'variables';
+@import 'mixins';
 
 //Full page application
 body {
@@ -37,7 +37,7 @@ router-outlet + * {
 //ionic native variables
 :root {
   /** User variables **/
-  --primary-color: $primary-color;
+  --primary-color: #29B6F6;
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
