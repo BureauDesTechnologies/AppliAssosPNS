@@ -13,9 +13,12 @@ import {PopupComponent} from "./components/popup/popup.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
+    DateAdapter,
+    MAT_DATE_FORMATS,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
@@ -23,6 +26,7 @@ import {
     MatIconRegistry,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSidenavModule,
@@ -67,6 +71,8 @@ import {PublishComponent} from "./components/articles-components/publish/publish
 import {ArticleService} from "./services/article.service";
 import {UserService} from "./services/user.service";
 import {HttpClientModule} from "@angular/common/http";
+import {EventService} from "./services/event.service";
+import {APP_DATE_FORMATS, AppDateAdapter} from "./utils/AppDateAdapter";
 
 @NgModule({
     declarations: [
@@ -116,6 +122,7 @@ import {HttpClientModule} from "@angular/common/http";
         MatCardModule,
         MatButtonModule,
         MatSnackBarModule,
+        MatDatepickerModule,
         MatDividerModule,
         MatIconModule,
         MatListModule,
@@ -123,6 +130,7 @@ import {HttpClientModule} from "@angular/common/http";
         MatProgressSpinnerModule,
         MatCheckboxModule,
         MatDialogModule,
+        MatNativeDateModule,
         MatSnackBarModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
@@ -139,9 +147,12 @@ import {HttpClientModule} from "@angular/common/http";
         AngularFireAuth,
         UserService,
         ArticleService,
+        EventService,
         PopupService,
         AngularFireAuth,
         MatIconRegistry,
+        {provide: DateAdapter, useClass: AppDateAdapter},
+        {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS},
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

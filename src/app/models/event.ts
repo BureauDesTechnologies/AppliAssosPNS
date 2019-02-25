@@ -1,13 +1,20 @@
-import {Article} from "./article";
-
 export class Event {
-    article: Article;
+    title: string;
+    content: string;
+    category: string;
     startDate: Date;
     endDate: Date;
+    imageUrl: string;
+    imageHeaderUrl: string;
 
-    constructor(article: Article, startDate: Date, endDate: Date) {
-        this.article = article;
+    constructor(title: string, content: string, category: string, startDate: Date,
+                endDate: Date, imageUrl: string, imageHeaderUrl: string) {
+        this.title = title;
+        this.content = content;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.imageUrl = imageUrl;
+        this.imageHeaderUrl = imageHeaderUrl;
+        this.category = category;
     }
 }

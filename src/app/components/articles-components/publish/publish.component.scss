@@ -1,0 +1,38 @@
+mat-card {
+  max-width: 800px;
+  margin: 8px auto;
+}
+
+mat-card-title {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  margin-left: -16px;
+  margin-right: -16px;
+  margin-top: -13px !important;
+
+  div {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+
+    &:not(:last-of-type) p {
+      border-right: solid 1px #c9c9c9;
+    }
+
+    p {
+      flex: 1;
+      margin-bottom: 0;
+      padding-top: 8px;
+      padding-bottom: 4px;
+    }
+
+    span {
+      width: 100%;
+      flex-basis: 3px;
+      background-color: var(--primary-color);
+      border-radius: 0 0 3px 3px;
+    }
+  }
+}
