@@ -1,3 +1,5 @@
+import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
+
 export class Event {
     title: string;
     content: string;
@@ -16,5 +18,15 @@ export class Event {
         this.imageUrl = imageUrl;
         this.imageHeaderUrl = imageHeaderUrl;
         this.category = category;
+    }
+
+    static fromDB(doc: DocumentSnapshot): Event {
+        return Event.fromJSON(doc.data());
+
+    }
+
+    static fromJSON(doc): Event {
+        return new Event(doc.title, doc.content, doc.category, new Date(doc.startDate.seconds * 1000),
+            doc.endDate !== null ? new Date(doc.endDate.seconds * 1000) : null, '', '');
     }
 }

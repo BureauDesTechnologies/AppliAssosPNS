@@ -73,6 +73,8 @@ import {UserService} from "./services/user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {EventService} from "./services/event.service";
 import {APP_DATE_FORMATS, AppDateAdapter} from "./utils/AppDateAdapter";
+import {ScheduleComponent} from './components/events-components/schedule/schedule.component';
+import {ScheduleEventItemComponent} from './components/events-components/schedule-event-item/schedule-event-item.component';
 
 @NgModule({
     declarations: [
@@ -104,7 +106,9 @@ import {APP_DATE_FORMATS, AppDateAdapter} from "./utils/AppDateAdapter";
         PopupComponent,
         DialogConfirmDeleteComponent,
         SubscribeToComponent,
-        PublishComponent
+        PublishComponent,
+        ScheduleComponent,
+        ScheduleEventItemComponent
     ],
     entryComponents: [
         DialogGiveRightsComponent,

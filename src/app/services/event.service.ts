@@ -24,6 +24,14 @@ export class EventService {
             endDate: event.endDate,
             creation: firebase.firestore.FieldValue.serverTimestamp()
         });
+    }
 
+    async getAll(): Promise<Event[]> {
+        const events = [];
+        const res = (await firestore().collection('Events').get()).docs;
+        for (let doc of res) {
+            events.push(Event.fromDB(doc))
+        }
+        return events;
     }
 }

@@ -23,11 +23,6 @@
                       type="text"></textarea>
             <mat-error>Ce champ doit être renseigné</mat-error>
         </mat-form-field>
-        <!--<input matInput [matDatepicker]="datepicker1" placeholder="Date de début"-->
-        <!--[(ngModel)]="event.startDate" required>-->
-        <!--<mat-datepicker [ngModelOptions]="{standalone: true}" [(ngModel)]="event.startDate" #datepicker1 required></mat-datepicker>-->
-        <!--<mat-datepicker name="end" [(ngModel)]="event.endDate"></mat-datepicker>-->
-
         <div id="dateInputs">
             <div *ngIf="!isMobile" class="startDateTime">
                 <mat-form-field>
@@ -70,26 +65,26 @@
             </div>
             <div *ngIf="!isMobile" class="endDateTime">
                 <mat-form-field>
-                    <input [(ngModel)]="event.endDate" [matDatepicker]="picker" matInput name="endDate"
-                           placeholder="Date de début" required>
-                    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
+                    <input [(ngModel)]="event.endDate" [matDatepicker]="picker2" matInput name="endDate"
+                           placeholder="Date de fin" required>
+                    <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
                 </mat-form-field>
                 <div *ngIf="event.endDate !== undefined && event.endDate !== null" class="hourInput">
                     <p>à</p>
-                    <input [(ngModel)]="hourStart"
+                    <input [(ngModel)]="hourEnd"
                            [disabled]="event.endDate === undefined || event.endDate === null"
-                           matInput max="23" min="0" name="startHour" placeholder="Heure" type="number">
+                           matInput max="23" min="0" name="endHour" placeholder="Heure" type="number">
                     <span>h</span>
-                    <input [(ngModel)]="minuteStart"
+                    <input [(ngModel)]="minuteEnd"
                            [disabled]="event.endDate === undefined || event.endDate === null"
-                           matInput max="59" min="0" name="startMinute" placeholder="Minute"
+                           matInput max="59" min="0" name="endMinute" placeholder="Minute"
                            type="number">
                 </div>
             </div>
             <div *ngIf="isMobile" class="endDateTime">
                 <ion-item>
-                    <ion-label>Le</ion-label>
+                    <ion-label>Jusqu'au</ion-label>
                     <ion-datetime (ionChange)="changeEndDate($event)"
                                   [value]="event.endDate !== null ? event.endDate.toISOString() : null"
                                   day-names="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche"
