@@ -29,7 +29,7 @@
         <!--<mat-datepicker name="end" [(ngModel)]="event.endDate"></mat-datepicker>-->
 
         <div id="dateInputs">
-            <div id="startDateTime">
+            <div *ngIf="!isMobile" class="startDateTime">
                 <mat-form-field>
                     <input [(ngModel)]="event.startDate" [matDatepicker]="picker" matInput name="startDate"
                            placeholder="Date de début" required>
@@ -40,26 +40,71 @@
                     <p>à</p>
                     <input [(ngModel)]="hourStart"
                            [disabled]="event.startDate === undefined || event.startDate === null"
-                           matInput max="23" min="0" name="startHour" placeholder="Heure" type="number"><span>h</span>
+                           matInput max="23" min="0" name="startHour" placeholder="Heure" type="number">
+                    <span>h</span>
                     <input [(ngModel)]="minuteStart"
                            [disabled]="event.startDate === undefined || event.startDate === null"
                            matInput max="59" min="0" name="startMinute" placeholder="Minute"
                            type="number">
                 </div>
             </div>
-            <div id="endDateTime">
+            <div *ngIf="isMobile" class="startDateTime">
+                <ion-item>
+                    <ion-label>Le</ion-label>
+                    <ion-datetime (ionChange)="changeStartDate($event)"
+                                  [value]="event.startDate !== null ? event.startDate.toISOString() : null"
+                                  day-names="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche"
+                                  day-short-names="Lun, Mar, Mer, Jeu, Ven, Sam, Dim"
+                                  displayFormat="DD/MM/YY"
+                                  month-names="Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, November, Décembre"
+                                  month-short-names="Jan, Fev, Mar, Avr, Mai, Juin, Juil, Aou, Sep, Oct, Nov, Déc"
+                                  placeholder="DD/MM/YY"></ion-datetime>
+                </ion-item>
+                <div *ngIf="event.startDate !== undefined && event.startDate !== null" class="hourInput">
+                    <ion-item>
+                        <ion-label>à</ion-label>
+                        <ion-datetime (ionChange)="changeStartHour($event)" displayFormat="HH:mm"
+                                      placeholder="HH:mm"></ion-datetime>
+                    </ion-item>
+                </div>
+            </div>
+            <div *ngIf="!isMobile" class="endDateTime">
                 <mat-form-field>
-                    <input [(ngModel)]="event.endDate" [matDatepicker]="picker2" matInput name="startDate"
-                           placeholder="Date de fin">
-                    <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
+                    <input [(ngModel)]="event.endDate" [matDatepicker]="picker" matInput name="endDate"
+                           placeholder="Date de début" required>
+                    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
                 <div *ngIf="event.endDate !== undefined && event.endDate !== null" class="hourInput">
                     <p>à</p>
-                    <input [(ngModel)]="hourEnd" [disabled]="event.endDate === undefined || event.endDate === null"
-                           matInput max="23" min="0" name="endHour" placeholder="Heure" type="number"><span>h</span>
-                    <input [(ngModel)]="minuteEnd" [disabled]="event.endDate === undefined || event.endDate === null"
-                           matInput max="59" min="0" name="endMinute" placeholder="Minute" type="number">
+                    <input [(ngModel)]="hourStart"
+                           [disabled]="event.endDate === undefined || event.endDate === null"
+                           matInput max="23" min="0" name="startHour" placeholder="Heure" type="number">
+                    <span>h</span>
+                    <input [(ngModel)]="minuteStart"
+                           [disabled]="event.endDate === undefined || event.endDate === null"
+                           matInput max="59" min="0" name="startMinute" placeholder="Minute"
+                           type="number">
+                </div>
+            </div>
+            <div *ngIf="isMobile" class="endDateTime">
+                <ion-item>
+                    <ion-label>Le</ion-label>
+                    <ion-datetime (ionChange)="changeEndDate($event)"
+                                  [value]="event.endDate !== null ? event.endDate.toISOString() : null"
+                                  day-names="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche"
+                                  day-short-names="Lun, Mar, Mer, Jeu, Ven, Sam, Dim"
+                                  displayFormat="DD/MM/YY"
+                                  month-names="Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, November, Décembre"
+                                  month-short-names="Jan, Fev, Mar, Avr, Mai, Juin, Juil, Aou, Sep, Oct, Nov, Déc"
+                                  placeholder="DD/MM/YY"></ion-datetime>
+                </ion-item>
+                <div *ngIf="event.endDate !== undefined && event.endDate !== null" class="hourInput">
+                    <ion-item>
+                        <ion-label>à</ion-label>
+                        <ion-datetime (ionChange)="changeEndHour($event)" displayFormat="HH:mm"
+                                      placeholder="HH:mm"></ion-datetime>
+                    </ion-item>
                 </div>
             </div>
         </div>

@@ -5,6 +5,7 @@ import {MatSnackBar} from "@angular/material";
 import {Event} from "../../../models/event";
 import {Router} from "@angular/router";
 import {EventService} from "../../../services/event.service";
+import {Platform} from "@ionic/angular";
 
 @Component({
     selector: 'app-add-event',
@@ -18,11 +19,14 @@ export class AddEventComponent implements OnInit {
     user: User;
     imageToDisplay: string;
 
+    isMobile = false;
+
     constructor(private userService: UserService, private eventService: EventService,
-                private snackbar: MatSnackBar, private router: Router) {
+                private snackbar: MatSnackBar, private router: Router, private plt: Platform) {
         this.event = new Event('', '', '', new Date(), new Date(), '', '');
         this.user = new User('', '', '', '', [], [], 'placeholder');
         this.imageToDisplay = '';
+        this.isMobile = !this.plt.is('desktop');
     }
 
     private _hourStart: number;
@@ -34,7 +38,7 @@ export class AddEventComponent implements OnInit {
     set hourStart(value: number) {
         this._hourStart = (value > 23 ? 23 : (value < 0 ? 0 : value));
         if ((this.event.startDate !== null && this.event.startDate !== undefined)) {
-            this.event.startDate.setHours(this.hourStart);
+            this.event.startDate.setUTCHours(this.hourStart);
         }
     }
 
@@ -47,7 +51,7 @@ export class AddEventComponent implements OnInit {
     set minuteStart(value: number) {
         this._minuteStart = (value > 59 ? 59 : (value < 0 ? 0 : value));
         if ((this.event.startDate !== null && this.event.startDate !== undefined)) {
-            this.event.startDate.setMinutes(this.minuteStart);
+            this.event.startDate.setUTCMinutes(this.minuteStart);
         }
     }
 
@@ -60,7 +64,7 @@ export class AddEventComponent implements OnInit {
     set hourEnd(value: number) {
         this._hourEnd = (value > 23 ? 23 : (value < 0 ? 0 : value));
         if ((this.event.endDate !== null && this.event.endDate !== undefined)) {
-            this.event.endDate.setHours(this.hourEnd);
+            this.event.endDate.setUTCHours(this.hourEnd);
         }
     }
 
@@ -73,7 +77,7 @@ export class AddEventComponent implements OnInit {
     set minuteEnd(value: number) {
         this._minuteEnd = (value > 59 ? 59 : (value < 0 ? 0 : value));
         if ((this.event.endDate !== null && this.event.endDate !== undefined)) {
-            this.event.endDate.setMinutes(this.minuteEnd);
+            this.event.endDate.setUTCMinutes(this.minuteEnd);
         }
     }
 
@@ -87,4 +91,29 @@ export class AddEventComponent implements OnInit {
             this.event.category = this.user.canPublishAs[0];
         }
     }
+
+    changeStartHour(event: CustomEvent) {
+        const value: string = event.detail.value;
+        const data = value.split(':');
+        this.hourStart = parseInt(data[0]);
+        this.minuteStart = parseInt(data[1]);
+    }
+
+    changeEndHour(event: CustomEvent) {
+        const value: string = event.detail.value;
+        const data = value.split(':');
+        this.hourEnd = parseInt(data[0]);
+        this.minuteEnd = parseInt(data[1]);
+    }
+
+    changeStartDate(event: CustomEvent) {
+        const value: string = event.detail.value;
+        this.event.startDate = new Date(value);
+    }
+
+    changeEndDate(event: CustomEvent) {
+        const value: string = event.detail.value;
+        this.event.endDate = new Date(value);
+    }
+
 }
