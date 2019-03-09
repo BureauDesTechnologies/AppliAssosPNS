@@ -23,8 +23,24 @@
             <br *ngIf="description !== descriptions[descriptions.length - 1]">
             <br *ngIf="description !== descriptions[descriptions.length - 1]">
         </p>
+        <div *ngIf="mail !==''" class="contact">
+            <div class="socialNetwork" *ngIf="facebookUrl !== ''">
+                <mat-icon svgIcon="facebook"></mat-icon>
+                <a target="_blank" [href]="facebookUrl">{{facebookName !== '' ? facebookName : facebookUrl}}</a>
+            </div>
+            <div class="socialNetwork" *ngIf="twitterUrl !== ''">
+                <mat-icon svgIcon="twitter"></mat-icon>
+                <a target="_blank" [href]="twitterUrl">{{twitterName !== '' ? twitterName : twitterName}}</a>
+            </div>
+            <div class="socialNetwork" *ngIf="linkedinUrl !== ''">
+                <mat-icon svgIcon="linkedin"></mat-icon>
+                <a target="_blank" [href]="linkedinUrl">{{linkedinName !== '' ? linkedinName : linkedinName}}</a>
+            </div>
+            <div class="socialNetwork" *ngIf="mail !== ''">
+                <mat-icon svgIcon="mail"></mat-icon>
+                <a [href]="'mailto:' + mail">{{mail}}</a>
+            </div>
+        </div>
     </div>
 </div>
-<div *ngIf="contact !==''" class="contact">
-    <p>{{contact}}</p>
-</div>
+
