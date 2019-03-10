@@ -6,6 +6,10 @@
   grid-gap: 1px;
   padding: 1px;
   margin: 8px;
+
+  @media (max-width: 734px) {
+    grid-template-columns: repeat(7, calc(100vw / 7 - 6px));
+  }
 }
 
 .header {
