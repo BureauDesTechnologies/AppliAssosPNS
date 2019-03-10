@@ -21,6 +21,13 @@
                       type="text"></textarea>
         <mat-error>Ce champ doit être renseigné</mat-error>
     </mat-form-field>
+    <mat-select (selectionChange)="article.eventLinked = $event.value"
+                id="eventLinked"
+                placeholder="Lier à l'événement" required>
+        <mat-option *ngFor="let event of events" [value]="event">
+            {{event.title}}
+        </mat-option>
+    </mat-select>
     <app-file-upload (downloadableOn)="imageToDisplay = $event"
                      (uploadedOnURL)="article.imageUrl = $event"
                      *ngIf="imageToDisplay ===''"

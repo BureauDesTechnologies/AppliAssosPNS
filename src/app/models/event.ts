@@ -2,6 +2,7 @@ import * as firebase from "firebase";
 import DocumentSnapshot = firebase.firestore.DocumentSnapshot;
 
 export class Event {
+    id: string;
     title: string;
     content: string;
     category: string;
@@ -22,7 +23,9 @@ export class Event {
     }
 
     static fromDB(doc: DocumentSnapshot): Event {
-        return Event.fromJSON(doc.data());
+        const event = Event.fromJSON(doc.data());
+        event.id = doc.id;
+        return event;
 
     }
 

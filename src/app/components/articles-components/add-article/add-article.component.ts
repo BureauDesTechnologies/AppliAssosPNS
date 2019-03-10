@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {User} from "../../../models/user";
 import {Article} from "../../../models/article";
+import {EventService} from "../../../services/event.service";
+import {Event} from "src/app/models/event";
 
 @Component({
     selector: 'app-add-article',
@@ -15,7 +17,7 @@ export class AddArticleComponent implements OnInit {
      * Article to supply, passed by the parent component, that will add this article later
      */
     @Input()
-    article;
+    article: Article;
     /**
      * Only used to verify that user can publish
      */
@@ -23,15 +25,18 @@ export class AddArticleComponent implements OnInit {
     user: User;
     imageToDisplay: string;
 
-    constructor() {
+    events: Event[];
+
+    constructor(private eventService: EventService) {
         this.imageToDisplay = '';
         this.article =
             new Article(null, "", "", "", "", [], [], null);
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         if (this.user.canPublishAs.length === 1) {
             this.article.category = this.user.canPublishAs[0];
         }
+        this.events = await this.eventService.getAll();
     }
 }
