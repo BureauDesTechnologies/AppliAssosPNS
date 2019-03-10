@@ -41,6 +41,11 @@ app-file-upload {
   grid-gap: 8px;
   margin: 8px auto;
   text-align: center;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
 }
 
 #dateInputs {
