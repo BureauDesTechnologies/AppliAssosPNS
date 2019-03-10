@@ -34,13 +34,17 @@ export class ArticleService {
      * @param article with title, content, category, imageUrl
      */
     addArticle(article: Article) {
-        return firestore().collection('Articles').add({
+        const data = {
             title: article.title,
             content: article.content,
             category: article.category,
             imageUrl: article.imageUrl,
             creation: firebase.firestore.FieldValue.serverTimestamp()
-        });
+        };
+        if (article.eventLinked !== undefined) {
+            data['eventLinked'] = firestore().collection('Events').doc(article.eventLinked.id);
+        }
+        return firestore().collection('Articles').add(data);
     }
 
     // noinspection JSMethodCanBeStatic
