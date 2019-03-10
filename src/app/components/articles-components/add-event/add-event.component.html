@@ -110,14 +110,15 @@
                              [displayedTitle]="'Ajouter une image principale'"
                              [expectedType]="'image'"
                              [subFolder]="'articleImages'"></app-file-upload>
-            <app-file-upload (downloadableOn)="imageToDisplay = $event"
+            <img *ngIf="imageToDisplay !== ''" [src]="imageToDisplay" alt="">
+            <app-file-upload (downloadableOn)="headerToDisplay = $event"
                              (uploadedOnURL)="event.imageUrl = $event"
-                             *ngIf="imageToDisplay ===''"
+                             *ngIf="headerToDisplay ===''"
                              [displayedTitle]="'Ajouter une bannière'"
                              [expectedType]="'image'"
                              [subFolder]="'articleImages'"></app-file-upload>
+            <img *ngIf="headerToDisplay !== ''" [src]="headerToDisplay" alt="">
         </div>
-        <img *ngIf="imageToDisplay !== ''" [src]="imageToDisplay" alt="">
 
     </div>
 </form>

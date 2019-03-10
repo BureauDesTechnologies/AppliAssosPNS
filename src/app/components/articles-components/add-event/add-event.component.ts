@@ -18,6 +18,7 @@ export class AddEventComponent implements OnInit {
 
     user: User;
     imageToDisplay: string;
+    headerToDisplay: string;
 
     isMobile = false;
 
@@ -26,6 +27,7 @@ export class AddEventComponent implements OnInit {
         this.event = new Event('', '', '', new Date(), new Date(), '', '');
         this.user = new User('', '', '', '', [], [], 'placeholder');
         this.imageToDisplay = '';
+        this.headerToDisplay = '';
         this.isMobile = !this.plt.is('desktop');
     }
 
@@ -38,7 +40,7 @@ export class AddEventComponent implements OnInit {
     set hourStart(value: number) {
         this._hourStart = (value > 23 ? 23 : (value < 0 ? 0 : value));
         if ((this.event.startDate !== null && this.event.startDate !== undefined)) {
-            this.event.startDate.setUTCHours(this.hourStart);
+            this.event.startDate.setHours(this.hourStart);
         }
     }
 
@@ -51,7 +53,7 @@ export class AddEventComponent implements OnInit {
     set minuteStart(value: number) {
         this._minuteStart = (value > 59 ? 59 : (value < 0 ? 0 : value));
         if ((this.event.startDate !== null && this.event.startDate !== undefined)) {
-            this.event.startDate.setUTCMinutes(this.minuteStart);
+            this.event.startDate.setMinutes(this.minuteStart);
         }
     }
 
@@ -64,7 +66,7 @@ export class AddEventComponent implements OnInit {
     set hourEnd(value: number) {
         this._hourEnd = (value > 23 ? 23 : (value < 0 ? 0 : value));
         if ((this.event.endDate !== null && this.event.endDate !== undefined)) {
-            this.event.endDate.setUTCHours(this.hourEnd);
+            this.event.endDate.setHours(this.hourEnd);
         }
     }
 
@@ -77,7 +79,7 @@ export class AddEventComponent implements OnInit {
     set minuteEnd(value: number) {
         this._minuteEnd = (value > 59 ? 59 : (value < 0 ? 0 : value));
         if ((this.event.endDate !== null && this.event.endDate !== undefined)) {
-            this.event.endDate.setUTCMinutes(this.minuteEnd);
+            this.event.endDate.setMinutes(this.minuteEnd);
         }
     }
 
