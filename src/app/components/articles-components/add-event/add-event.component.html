@@ -45,7 +45,7 @@
             </div>
             <div *ngIf="isMobile" class="startDateTime">
                 <ion-item>
-                    <ion-label>Le</ion-label>
+                    <ion-label>Du</ion-label>
                     <ion-datetime (ionChange)="changeStartDate($event)"
                                   [value]="event.startDate !== null ? event.startDate.toISOString() : null"
                                   day-names="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche"
@@ -84,7 +84,7 @@
             </div>
             <div *ngIf="isMobile" class="endDateTime">
                 <ion-item>
-                    <ion-label>Jusqu'au</ion-label>
+                    <ion-label>au</ion-label>
                     <ion-datetime (ionChange)="changeEndDate($event)"
                                   [value]="event.endDate !== null ? event.endDate.toISOString() : null"
                                   day-names="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche"

@@ -21,6 +21,16 @@
   flex-basis: 200px;
 }
 
+#eventLinkForm {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 8px;
+
+  label {
+    margin-top: 2px;
+  }
+}
+
 mat-form-field {
   display: block;
 }

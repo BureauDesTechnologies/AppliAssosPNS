@@ -34,4 +34,13 @@ export class EventService {
         }
         return events;
     }
+
+    async getAllOf(category: string): Promise<Event[]> {
+        const events = [];
+        const res = (await firestore().collection('Events').where('category', '==', category).get()).docs;
+        for (let doc of res) {
+            events.push(Event.fromDB(doc))
+        }
+        return events;
+    }
 }

@@ -3,6 +3,7 @@ import {User} from "../../../models/user";
 import {Article} from "../../../models/article";
 import {EventService} from "../../../services/event.service";
 import {Event} from "src/app/models/event";
+import {MatSelectChange} from "@angular/material";
 
 @Component({
     selector: 'app-add-article',
@@ -36,7 +37,19 @@ export class AddArticleComponent implements OnInit {
     async ngOnInit() {
         if (this.user.canPublishAs.length === 1) {
             this.article.category = this.user.canPublishAs[0];
+            this.events = await this.eventService.getAllOf(this.article.category);
         }
-        this.events = await this.eventService.getAll();
+    }
+
+    changeAsso(change: MatSelectChange) {
+        this.events = undefined;
+        if (this.article.category !== change.value) {
+            this.article.category = change.value;
+            console.log('Fetch events');
+            this.eventService.getAllOf(this.article.category).then(val => {
+                console.log('Fetch events done');
+                this.events = val;
+            });
+        }
     }
 }

@@ -85,14 +85,14 @@ export class ArticleViewComponent implements OnInit {
         this.articleBase = new Article(this.article.id, this.article.title, this.article.content,
             this.article.imageUrl, this.article.category, [], [], this.article.creation);
         this.connectedUser = await this.userService.getLoggedUser();
-
-        if (this.article.clap.has(this.connectedUser.userId)) {
-            this.hasBeenClap = true;
+        if ((this.connectedUser !== null && this.connectedUser !== undefined)) {
+            if (this.article.clap.has(this.connectedUser.userId)) {
+                this.hasBeenClap = true;
+            }
+            if (this.article.favorite.has(this.connectedUser.userId)) {
+                this.hasBeenFav = true;
+            }
         }
-        if (this.article.favorite.has(this.connectedUser.userId)) {
-            this.hasBeenFav = true;
-        }
-
         this.tokens = this.tokenize(this.article);
     }
 

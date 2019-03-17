@@ -44,6 +44,8 @@ export class AppComponent {
     }
 
     async ngOnInit() {
+        this.isLogged = (this.connectedUser !== null && this.connectedUser !== undefined);
+
         this.router.events.subscribe(event => {
             if (event instanceof RoutesRecognized) {
                 this.currentRoute = event.url;
@@ -51,18 +53,14 @@ export class AppComponent {
         });
 
         this.connectedUser = await this.userService.getLoggedUser();
-        if (this.connectedUser !== null) {
-            this.isLogged = true;
-        }
+        this.isLogged = (this.connectedUser !== null && this.connectedUser !== undefined);
         (await this.userService.streamLoggedUser()).subscribe(user => {
+            this.connectedUser = user;
+            this.isLogged = (this.connectedUser !== null && this.connectedUser !== undefined);
             if (user === null && this.connectedUser !== null) {
                 // Disconnect from user
-                this.isLogged = false;
                 this.router.navigate(['/']);
-            } else {
-                this.isLogged = true;
             }
-            this.connectedUser = user;
         });
 
 
