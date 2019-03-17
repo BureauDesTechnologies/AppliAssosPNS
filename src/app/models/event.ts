@@ -10,6 +10,8 @@ export class Event {
     endDate: Date;
     imageUrl: string;
     imageHeaderUrl: string;
+    downloadableImageUrl: string = null;
+    downloadableImageHeaderUrl: string = null;
 
     constructor(title: string, content: string, category: string, startDate: Date,
                 endDate: Date, imageUrl: string, imageHeaderUrl: string) {
@@ -31,6 +33,8 @@ export class Event {
 
     static fromJSON(doc): Event {
         return new Event(doc.title, doc.content, doc.category, new Date(doc.startDate.seconds * 1000),
-            doc.endDate !== null ? new Date(doc.endDate.seconds * 1000) : null, '', '');
+            doc.endDate !== null ? new Date(doc.endDate.seconds * 1000) : null,
+            doc.imageUrl !== '' ? doc.imageUrl : null,
+            doc.imageHeaderUrl !== '' ? doc.imageHeaderUrl : null);
     }
 }

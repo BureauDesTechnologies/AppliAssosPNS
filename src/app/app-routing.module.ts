@@ -27,6 +27,7 @@ const routes: Routes = [
     {path: "bda", component: BdaComponent},
     {path: "bdh", component: BdhComponent},
     {path: "pnc", component: PncComponent},
+    {path: 'event/:id', component: ProfileComponent},
     {path: "profile", component: ProfileComponent},
     {path: "registration", component: RegistrationComponent},
     {path: "login", component: LoginComponent},

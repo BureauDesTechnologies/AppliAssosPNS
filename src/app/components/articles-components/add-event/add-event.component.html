@@ -109,14 +109,14 @@
                              *ngIf="imageToDisplay ===''"
                              [displayedTitle]="'Ajouter une image principale'"
                              [expectedType]="'image'"
-                             [subFolder]="'articleImages'"></app-file-upload>
+                             [subFolder]="'eventImages'"></app-file-upload>
             <img *ngIf="imageToDisplay !== ''" [src]="imageToDisplay" alt="">
             <app-file-upload (downloadableOn)="headerToDisplay = $event"
                              (uploadedOnURL)="event.imageUrl = $event"
                              *ngIf="headerToDisplay ===''"
                              [displayedTitle]="'Ajouter une bannière'"
                              [expectedType]="'image'"
-                             [subFolder]="'articleImages'"></app-file-upload>
+                             [subFolder]="'eventImages'"></app-file-upload>
             <img *ngIf="headerToDisplay !== ''" [src]="headerToDisplay" alt="">
         </div>
 

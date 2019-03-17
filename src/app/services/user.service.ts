@@ -20,7 +20,6 @@ export class UserService {
     constructor(private st: AngularFireStorage, private db: AngularFirestore) {
         this.loggedUser = new UserWatcher();
         firebase.auth().onAuthStateChanged((user) => {
-            console.log(user);
             if (user) {
                 this.getLoggedUserFromCache();
             } else {

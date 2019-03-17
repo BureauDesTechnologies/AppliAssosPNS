@@ -2,7 +2,7 @@
   display: grid;
   //grid-template-columns: repeat(7, 1fr);
   grid-template-columns: repeat(7, calc(100vw / 7 - 22px));
-  grid-template-rows: auto repeat(4, 1fr);
+  grid-template-rows: auto repeat(4, minmax(90px, auto));
   grid-gap: 1px;
   padding: 1px;
   margin: 8px;

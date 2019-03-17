@@ -13,6 +13,33 @@ export class EventService {
     constructor(private st: AngularFireStorage) {
     }
 
+
+    /**
+     * Retrieve the link of the main image of an event
+     * @param event with imageUrl supplied
+     * @throws Error if event.imageUrl is null, undefined or equals ''
+     */
+    async getDownloadImageUrl(event: Event): Promise<string> {
+        if (event.imageUrl === '' || (event.imageUrl === null || event.imageUrl === undefined)) {
+            throw Error("You should not try to load download url on a article without imageUrl");
+        } else {
+            return this.st.ref(event.imageUrl).getDownloadURL().toPromise();
+        }
+    }
+
+    /**
+     * Retrieve the link of the header image of an event
+     * @param event with imageHeaderUrl supplied
+     * @throws Error if event.imageHeaderUrl is null, undefined or equals ''
+     */
+    async getDownloadImageHeaderUrl(event: Event): Promise<string> {
+        if (event.imageHeaderUrl === '' || (event.imageHeaderUrl === null || event.imageHeaderUrl === undefined)) {
+            throw Error("You should not try to load download url on a article without imageUrl");
+        } else {
+            return this.st.ref(event.imageHeaderUrl).getDownloadURL().toPromise();
+        }
+    }
+
     addEvent(event: Event) {
         return firestore().collection('Events').add({
             title: event.title,
@@ -27,19 +54,33 @@ export class EventService {
     }
 
     async getAll(): Promise<Event[]> {
-        const events = [];
+        const events: Event[] = [];
         const res = (await firestore().collection('Events').get()).docs;
         for (let doc of res) {
-            events.push(Event.fromDB(doc))
+            const event: Event = Event.fromDB(doc);
+            if ((event.imageUrl !== null && event.imageUrl !== undefined)) {
+                event.downloadableImageUrl = await this.getDownloadImageUrl(event);
+            }
+            if ((event.imageHeaderUrl !== null && event.imageHeaderUrl !== undefined)) {
+                event.downloadableImageHeaderUrl = await this.getDownloadImageHeaderUrl(event);
+            }
+            events.push(event)
         }
         return events;
     }
 
     async getAllOf(category: string): Promise<Event[]> {
-        const events = [];
+        const events: Event[] = [];
         const res = (await firestore().collection('Events').where('category', '==', category).get()).docs;
         for (let doc of res) {
-            events.push(Event.fromDB(doc))
+            const event: Event = Event.fromDB(doc);
+            if ((event.imageUrl !== null && event.imageUrl !== undefined)) {
+                event.downloadableImageUrl = await this.getDownloadImageUrl(event);
+            }
+            if ((event.imageHeaderUrl !== null && event.imageHeaderUrl !== undefined)) {
+                event.downloadableImageHeaderUrl = await this.getDownloadImageHeaderUrl(event);
+            }
+            events.push(event)
         }
         return events;
     }
