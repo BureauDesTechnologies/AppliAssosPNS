@@ -1,10 +1,13 @@
-@import './variables';
-@import './mixins';
+@import 'variables';
+@import 'mixins';
 
+//Full page application
 body {
   min-height: 100vh;
 }
 
+//Styles the snackbar with Coddy, the BDC"s racoon
+//This style is injected in material snackbar, so it must have !important attribute to override default behaviors
 .popupSnackBar {
   background: transparent !important;
   text-align: right !important;
@@ -18,6 +21,7 @@ body {
   max-width: 400px !important;
 }
 
+//Style the selection on the site, color white is essential for everything to displays fine
 ::selection {
   color: white;
   background: $primary-color;
@@ -30,8 +34,10 @@ router-outlet + * {
   width: 100%;
 }
 
+//ionic native variables
 :root {
-  --primary-color: $primary-color;
+  /** User variables **/
+  --primary-color: #29B6F6;
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;

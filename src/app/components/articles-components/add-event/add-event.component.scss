@@ -1,0 +1,77 @@
+.form {
+  padding-bottom: 24px;
+}
+
+//Form with title and Asso's name
+.firstForm {
+  display: flex;
+  flex-flow: wrap;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+//Title input
+#title {
+  flex: 1;
+  padding-right: 20px;
+}
+
+//Asso's name input
+#category {
+  flex-basis: 200px;
+}
+
+mat-form-field {
+  display: block;
+}
+
+app-file-upload {
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}
+
+.imagesUpload {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-gap: 8px;
+  margin: 8px auto;
+  text-align: center;
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+
+#dateInputs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.startDateTime, .endDateTime {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+
+  p {
+    margin: 0 1em;
+  }
+}
+
+.hourInput {
+  display: inline-flex;
+
+  span {
+    color: var(--primary-color);
+    margin: 0 5px;
+  }
+
+  input:first-of-type {
+    text-align: right;
+  }
+}

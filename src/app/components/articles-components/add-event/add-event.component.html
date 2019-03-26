@@ -1,13 +1,13 @@
-<form (submit)="addArticleOnSubmit()">
+<form>
     <div class="form">
         <div class="firstForm">
             <mat-form-field id="title">
-                <input [(ngModel)]="articleToAdd.title" autocomplete="off" matInput name="title" placeholder="Titre"
+                <input [(ngModel)]="event.title" autocomplete="off" matInput name="title" placeholder="Titre"
                        required
                        type="text"/>
                 <mat-error>Ce champ doit être renseigné</mat-error>
             </mat-form-field>
-            <mat-select (selectionChange)="articleToAdd.category = $event.value" *ngIf="user.canPublishAs.length > 1"
+            <mat-select (selectionChange)="event.category = $event.value" *ngIf="user.canPublishAs.length > 1"
                         id="category"
                         placeholder="Publier en tant que" required>
                 <mat-option *ngFor="let publishAs of user.canPublishAs" [value]="publishAs">
@@ -19,20 +19,106 @@
             </div>
         </div>
         <mat-form-field>
-            <textarea [(ngModel)]="articleToAdd.content" matInput name="content" placeholder="Contenu" required
+            <textarea [(ngModel)]="event.content" matInput name="content" placeholder="Description" required
                       type="text"></textarea>
             <mat-error>Ce champ doit être renseigné</mat-error>
         </mat-form-field>
-        <app-file-upload (downloadableOn)="imageToDisplay = $event"
-                         (uploadedOnURL)="articleToAdd.imageUrl = $event"
-                         *ngIf="imageToDisplay ===''"
-                         [displayedTitle]="'Ajouter une image'"
-                         [expectedType]="'image'"
-                         [subFolder]="'articleImages'"></app-file-upload>
-        <img *ngIf="imageToDisplay !== ''" [src]="imageToDisplay" alt="">
+        <div id="dateInputs">
+            <div *ngIf="!isMobile" class="startDateTime">
+                <mat-form-field>
+                    <input [(ngModel)]="event.startDate" [matDatepicker]="picker" matInput name="startDate"
+                           placeholder="Date de début" required>
+                    <mat-datepicker-toggle [for]="picker" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="event.startDate !== undefined && event.startDate !== null" class="hourInput">
+                    <p>à</p>
+                    <input [(ngModel)]="hourStart"
+                           [disabled]="event.startDate === undefined || event.startDate === null"
+                           matInput max="23" min="0" name="startHour" placeholder="Heure" type="number">
+                    <span>h</span>
+                    <input [(ngModel)]="minuteStart"
+                           [disabled]="event.startDate === undefined || event.startDate === null"
+                           matInput max="59" min="0" name="startMinute" placeholder="Minute"
+                           type="number">
+                </div>
+            </div>
+            <div *ngIf="isMobile" class="startDateTime">
+                <ion-item>
+                    <ion-label>Du</ion-label>
+                    <ion-datetime (ionChange)="changeStartDate($event)"
+                                  [value]="event.startDate !== null ? event.startDate.toISOString() : null"
+                                  day-names="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche"
+                                  day-short-names="Lun, Mar, Mer, Jeu, Ven, Sam, Dim"
+                                  displayFormat="DD/MM/YY"
+                                  month-names="Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, November, Décembre"
+                                  month-short-names="Jan, Fev, Mar, Avr, Mai, Juin, Juil, Aou, Sep, Oct, Nov, Déc"
+                                  placeholder="DD/MM/YY"></ion-datetime>
+                </ion-item>
+                <div *ngIf="event.startDate !== undefined && event.startDate !== null" class="hourInput">
+                    <ion-item>
+                        <ion-label>à</ion-label>
+                        <ion-datetime (ionChange)="changeStartHour($event)" displayFormat="HH:mm"
+                                      placeholder="HH:mm"></ion-datetime>
+                    </ion-item>
+                </div>
+            </div>
+            <div *ngIf="!isMobile" class="endDateTime">
+                <mat-form-field>
+                    <input [(ngModel)]="event.endDate" [matDatepicker]="picker2" matInput name="endDate"
+                           placeholder="Date de fin" required>
+                    <mat-datepicker-toggle [for]="picker2" matSuffix></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                </mat-form-field>
+                <div *ngIf="event.endDate !== undefined && event.endDate !== null" class="hourInput">
+                    <p>à</p>
+                    <input [(ngModel)]="hourEnd"
+                           [disabled]="event.endDate === undefined || event.endDate === null"
+                           matInput max="23" min="0" name="endHour" placeholder="Heure" type="number">
+                    <span>h</span>
+                    <input [(ngModel)]="minuteEnd"
+                           [disabled]="event.endDate === undefined || event.endDate === null"
+                           matInput max="59" min="0" name="endMinute" placeholder="Minute"
+                           type="number">
+                </div>
+            </div>
+            <div *ngIf="isMobile" class="endDateTime">
+                <ion-item>
+                    <ion-label>au</ion-label>
+                    <ion-datetime (ionChange)="changeEndDate($event)"
+                                  [value]="event.endDate !== null ? event.endDate.toISOString() : null"
+                                  day-names="Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche"
+                                  day-short-names="Lun, Mar, Mer, Jeu, Ven, Sam, Dim"
+                                  displayFormat="DD/MM/YY"
+                                  month-names="Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Aout, Septembre, Octobre, November, Décembre"
+                                  month-short-names="Jan, Fev, Mar, Avr, Mai, Juin, Juil, Aou, Sep, Oct, Nov, Déc"
+                                  placeholder="DD/MM/YY"></ion-datetime>
+                </ion-item>
+                <div *ngIf="event.endDate !== undefined && event.endDate !== null" class="hourInput">
+                    <ion-item>
+                        <ion-label>à</ion-label>
+                        <ion-datetime (ionChange)="changeEndHour($event)" displayFormat="HH:mm"
+                                      placeholder="HH:mm"></ion-datetime>
+                    </ion-item>
+                </div>
+            </div>
+        </div>
+        <div class="imagesUpload">
+            <app-file-upload (downloadableOn)="imageToDisplay = $event"
+                             (uploadedOnURL)="event.imageUrl = $event"
+                             *ngIf="imageToDisplay ===''"
+                             [displayedTitle]="'Ajouter une image principale'"
+                             [expectedType]="'image'"
+                             [subFolder]="'eventImages'"></app-file-upload>
+            <img *ngIf="imageToDisplay !== ''" [src]="imageToDisplay" alt="">
+            <app-file-upload (downloadableOn)="headerToDisplay = $event"
+                             (uploadedOnURL)="event.imageUrl = $event"
+                             *ngIf="headerToDisplay ===''"
+                             [displayedTitle]="'Ajouter une bannière'"
+                             [expectedType]="'image'"
+                             [subFolder]="'eventImages'"></app-file-upload>
+            <img *ngIf="headerToDisplay !== ''" [src]="headerToDisplay" alt="">
+        </div>
 
     </div>
-    <button color="primary" mat-raised-button type="submit">
-        Valider
-    </button>
 </form>

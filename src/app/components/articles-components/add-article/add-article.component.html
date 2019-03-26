@@ -5,7 +5,7 @@
                    type="text"/>
             <mat-error>Ce champ doit être renseigné</mat-error>
         </mat-form-field>
-        <mat-select (selectionChange)="article.category = $event.value" *ngIf="user.canPublishAs.length > 1"
+        <mat-select (selectionChange)="changeAsso($event)" *ngIf="user.canPublishAs.length > 1"
                     id="category"
                     placeholder="Publier en tant que" required>
             <mat-option *ngFor="let publishAs of user.canPublishAs" [value]="publishAs">
@@ -21,6 +21,17 @@
                       type="text"></textarea>
         <mat-error>Ce champ doit être renseigné</mat-error>
     </mat-form-field>
+    <div id="eventLinkForm">
+        <label for="eventLinked">Lier à l'événement</label>
+        <mat-select (selectionChange)="article.eventLinked = $event.value"
+                    [placeholder]="article.category === undefined || article.category === '' ? 'Choisir une asso' : 'Aucun'"
+                    id="eventLinked" required>
+            <mat-option [value]="undefined">Aucun</mat-option>
+            <mat-option *ngFor="let event of events" [value]="event">
+                {{event.title}}
+            </mat-option>
+        </mat-select>
+    </div>
     <app-file-upload (downloadableOn)="imageToDisplay = $event"
                      (uploadedOnURL)="article.imageUrl = $event"
                      *ngIf="imageToDisplay ===''"

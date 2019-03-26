@@ -58,6 +58,10 @@ export class CommentComponent implements OnInit {
         };
     }
 
+    /**
+     * Parse content and produce tokens such as emote or text
+     * @param comment
+     */
     tokenize(comment: ArticleComment): CommentToken[] {
         const tokens: CommentToken[] = [];
         for (const line of comment.content.split('\n')) {
@@ -67,6 +71,10 @@ export class CommentComponent implements OnInit {
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Tokenize one line at a time
+     * @param lineIn
+     */
     private tokenizeLine(lineIn: string): CommentToken[] {
         const tokens: CommentToken[] = [];
         let line = '';

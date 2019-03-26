@@ -29,12 +29,18 @@ export enum TokenType {
     templateUrl: './article-view.component.html',
     styleUrls: ['./article-view.component.css']
 })
+/**
+ * Component that displays an article and edit it
+ */
 export class ArticleViewComponent implements OnInit {
 
+    /**
+     * Article to display
+     */
     @Input()
     article: Article;
 
-    articleBase: Article;
+    articleBase: Article; //Save the article before any edit
 
     /**
      * Enable to display asso Name in the detail view
@@ -59,7 +65,7 @@ export class ArticleViewComponent implements OnInit {
 
     writtenComment: string;
 
-    tokens;
+    tokens; //Use to display emotes and text
 
     constructor(private userService: UserService, private articleService: ArticleService,
                 private icons: MatIconRegistry, private domSanitizer: DomSanitizer,
@@ -79,14 +85,14 @@ export class ArticleViewComponent implements OnInit {
         this.articleBase = new Article(this.article.id, this.article.title, this.article.content,
             this.article.imageUrl, this.article.category, [], [], this.article.creation);
         this.connectedUser = await this.userService.getLoggedUser();
-
-        if (this.article.clap.has(this.connectedUser.userId)) {
-            this.hasBeenClap = true;
+        if ((this.connectedUser !== null && this.connectedUser !== undefined)) {
+            if (this.article.clap.has(this.connectedUser.userId)) {
+                this.hasBeenClap = true;
+            }
+            if (this.article.favorite.has(this.connectedUser.userId)) {
+                this.hasBeenFav = true;
+            }
         }
-        if (this.article.favorite.has(this.connectedUser.userId)) {
-            this.hasBeenFav = true;
-        }
-
         this.tokens = this.tokenize(this.article);
     }
 
@@ -157,6 +163,9 @@ export class ArticleViewComponent implements OnInit {
         }
     }
 
+    /**
+     * Shows confirmation for deletion dialog
+     */
     confirmDelete() {
         const dialogRef = this.dialog.open(DialogConfirmDeleteComponent, {
             maxWidth: '600px',
@@ -173,6 +182,11 @@ export class ArticleViewComponent implements OnInit {
         });
     }
 
+    /**
+     * Parse content and produce token such as text or emote. Thoses token will be used to display the article as
+     * it should appears
+     * @param article with content
+     */
     tokenize(article: Article): ArticleToken[] {
         const tokens: ArticleToken[] = [];
         for (const line of article.content.split('\n')) {
@@ -182,6 +196,10 @@ export class ArticleViewComponent implements OnInit {
     }
 
     // noinspection JSMethodCanBeStatic
+    /**
+     * Tokenize one line at a time
+     * @param lineIn
+     */
     private tokenizeLine(lineIn: string): ArticleToken[] {
         const tokens: ArticleToken[] = [];
         let line = '';

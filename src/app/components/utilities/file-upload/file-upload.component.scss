@@ -1,15 +1,17 @@
+@import "../../../../theme/variables";
+
 .dropzone {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 300px;
-  border: 2px dashed var(--primary-color);
+  border: 2px dashed $primary-color;
   border-radius: 5px;
   margin: 10px 0;
 
   &.hovering {
-    border: 2px solid var(--primary-color);
+    border: 2px solid $primary-color;
     color: #dadada !important;
   }
 }
@@ -20,7 +22,7 @@
 
 progress::-webkit-progress-value {
   transition: width 0.1s ease;
-  background: var(--primary-color);
+  background: $primary-color;
 }
 
 progress[value]::-webkit-progress-bar, progress::-moz-progress-bar {
@@ -34,7 +36,7 @@ progress[value]::-webkit-progress-bar, progress::-moz-progress-bar {
 
 .label-file {
   cursor: pointer;
-  color: var(--primary-color);
+  color: $primary-color;
   font-weight: bold;
 }
 
@@ -45,7 +47,7 @@ mat-icon {
 }
 
 .label-file:hover {
-  color: var(--primary-color);
+  color: $primary-color;
 }
 
 // et on masque le input

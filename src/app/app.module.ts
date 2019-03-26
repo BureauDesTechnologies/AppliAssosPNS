@@ -13,9 +13,12 @@ import {PopupComponent} from "./components/popup/popup.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {
+    DateAdapter,
+    MAT_DATE_FORMATS,
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
@@ -23,6 +26,7 @@ import {
     MatIconRegistry,
     MatInputModule,
     MatListModule,
+    MatNativeDateModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSidenavModule,
@@ -69,6 +73,10 @@ import {UserService} from "./services/user.service";
 import {HttpClientModule} from "@angular/common/http";
 import {NotificationService} from './services/notification.service';
 import {NotificationComponent} from './components/articles-components/notification/notification.component';
+import {EventService} from "./services/event.service";
+import {APP_DATE_FORMATS, AppDateAdapter} from "./utils/AppDateAdapter";
+import {ScheduleComponent} from './components/events-components/schedule/schedule.component';
+import {ScheduleEventItemComponent} from './components/events-components/schedule-event-item/schedule-event-item.component';
 
 @NgModule({
     declarations: [
@@ -101,6 +109,9 @@ import {NotificationComponent} from './components/articles-components/notificati
         DialogConfirmDeleteComponent,
         SubscribeToComponent,
         PublishComponent,
+        ScheduleComponent,
+        ScheduleEventItemComponent,
+        PublishComponent,
         NotificationComponent
     ],
     entryComponents: [
@@ -119,6 +130,7 @@ import {NotificationComponent} from './components/articles-components/notificati
         MatCardModule,
         MatButtonModule,
         MatSnackBarModule,
+        MatDatepickerModule,
         MatDividerModule,
         MatIconModule,
         MatListModule,
@@ -126,6 +138,7 @@ import {NotificationComponent} from './components/articles-components/notificati
         MatProgressSpinnerModule,
         MatCheckboxModule,
         MatDialogModule,
+        MatNativeDateModule,
         MatSnackBarModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
@@ -142,10 +155,13 @@ import {NotificationComponent} from './components/articles-components/notificati
         AngularFireAuth,
         UserService,
         ArticleService,
+        EventService,
         PopupService,
         NotificationService,
         AngularFireAuth,
         MatIconRegistry,
+        {provide: DateAdapter, useClass: AppDateAdapter},
+        {provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS},
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

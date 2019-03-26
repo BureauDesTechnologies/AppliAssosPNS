@@ -15,6 +15,7 @@ import {LoginComponent} from "./components/user-components/login/login.component
 import {RegistrationComponent} from "./components/user-components/registration/registration.component";
 import {ProfileComponent} from "./components/user-components/profile/profile.component";
 import {HomeComponent} from "./components/articles-components/home/home.component";
+import {AddEventComponent} from "./components/articles-components/add-event/add-event.component";
 import {NotificationComponent} from './components/articles-components/notification/notification.component';
 
 const routes: Routes = [
@@ -27,10 +28,12 @@ const routes: Routes = [
     {path: "bda", component: BdaComponent},
     {path: "bdh", component: BdhComponent},
     {path: "pnc", component: PncComponent},
+    {path: 'event/:id', component: ProfileComponent},
     {path: "profile", component: ProfileComponent},
     {path: "registration", component: RegistrationComponent},
     {path: "login", component: LoginComponent},
     {path: "publish", component: PublishComponent},
+    {path: "publishEvent", component: AddEventComponent},
     {path: "aboutAll", component: AssosOverviewComponent},
     {path: "giveRights", component: GiveRightsComponent},
     {path: "subscriptions", component: SubscribeToComponent},

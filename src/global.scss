@@ -28,26 +28,3 @@ $asso-pns-app-accent: mat-palette($mat-light-blue, A200, A100, A400);
 $asso-pns-app-theme: mat-light-theme($asso-pns-app-primary, $asso-pns-app-accent);
 
 @include angular-material-theme($asso-pns-app-theme);
-
-
-//body {
-//  min-height: 100vh;
-//}
-//
-//.popupSnackBar {
-//  background: transparent !important;
-//  text-align: right !important;
-//  max-width: 400px !important;
-//  padding: 0 !important;
-//  margin: 0 !important;
-//}
-//
-//.mat-snack-bar-handset {
-//  max-width: 400px !important;
-//}
-
-:root {
-  --primary-color: #00aeef;
-}
-
-

@@ -22,6 +22,8 @@ export class UserService {
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.getLoggedUserFromCache();
+            } else {
+                this.loggedUser.updateUser(null);
             }
         });
     }
@@ -76,6 +78,7 @@ export class UserService {
      * @returns Promise<void> to listen when user is connected then redirect him
      */
     tryConnect(userToConnect: User): Promise<void> {
+        console.log(userToConnect);
         return firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(() => {
                 return firebase.auth().signInWithEmailAndPassword(userToConnect.mail, userToConnect.password).then(() => {
@@ -85,11 +88,13 @@ export class UserService {
                         user.supplyWithFirebaseUser(firebase.auth().currentUser);
                         this.loggedUser.updateUser(user);
                     });
+                }).catch(() => {
+                    console.error('Error while connecting')
                 });
             })
             .catch(() => {
                 // Handle Errors here.
-                console.error('Error while connecting');
+                console.error('Error while trying to keep connection');
             });
     }
 
@@ -178,6 +183,10 @@ export class UserService {
         });
     }
 
+    /**
+     * Use to track user connection
+     * @param userId
+     */
     private updateLastConnection(userId: string) {
         const timestamp = firebase.firestore.FieldValue.serverTimestamp();
         this.db.collection('Users').doc(userId).update({
@@ -187,7 +196,12 @@ export class UserService {
         });
     }
 
+    /**
+     * Retrieve data from the logged Firebase User
+     * Fetech data from DB then update last connection
+     */
     private getLoggedUserFromCache() {
+        console.log('retrieve from cache');
         const docRef = this.db.collection('Users').doc(this.getLoggedFirebaseUser().uid).ref;
         docRef.get().then((doc) => {
             const user = User.fromDB(doc);
@@ -197,6 +211,11 @@ export class UserService {
         });
     }
 
+    /**
+     * Register user in firestore after registered him in authentication pannel
+     * @param user with mail, firstName, lastName, photoUrl
+     * @param uid id of the user when registered
+     */
     private registerUserInDatabase(user: User, uid: string) {
         const timestamp = firebase.firestore.FieldValue.serverTimestamp();
         this.db.collection('Users').doc(uid).ref.set({

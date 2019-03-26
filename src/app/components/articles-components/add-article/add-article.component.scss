@@ -1,0 +1,45 @@
+.form {
+  padding-bottom: 24px;
+}
+
+//Form with title and Asso's name
+.firstForm {
+  display: flex;
+  flex-flow: wrap;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+//Title input
+#title {
+  flex: 1;
+  padding-right: 20px;
+}
+
+//Asso's name input
+#category {
+  flex-basis: 200px;
+}
+
+#eventLinkForm {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-gap: 8px;
+
+  label {
+    margin-top: 2px;
+  }
+}
+
+mat-form-field {
+  display: block;
+}
+
+app-file-upload {
+  display: block;
+  width: 300px;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+}

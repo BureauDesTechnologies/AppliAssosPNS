@@ -1,12 +1,24 @@
 <mat-card *ngIf="canPublish != undefined" [ngClass]="user.userId !== 'placeholder' ? '': 'hideComponent'">
-    <mat-card-title>Ajouter un article</mat-card-title>
+    <mat-card-title>
+        <div (click)="kindToAdd = 'article'">
+            <p>Ajouter un article</p>
+            <span *ngIf="kindToAdd === 'article'"></span>
+        </div>
+        <div (click)="kindToAdd = 'event'">
+            <p>Ajouter un événement</p>
+            <span *ngIf="kindToAdd === 'event'"></span>
+        </div>
+    </mat-card-title>
     <div *ngIf="canPublish">
-        <app-add-article [article]="articleToSupply" [user]="user"></app-add-article>
+        <app-add-article *ngIf="kindToAdd === 'article'" [article]="articleToSupply" [user]="user"></app-add-article>
+        <app-add-event *ngIf="kindToAdd === 'event'" [event]="eventToSupply"></app-add-event>
     </div>
     <div *ngIf="!canPublish">
         <h1>Vous n'avez pas ces droits !</h1>
     </div>
-    <button (click)="publishArticle()" color="primary" mat-raised-button type="submit">
-        Valider
-    </button>
+    <div style="text-align: center">
+        <button (click)="publish()" color="primary" mat-raised-button type="submit">
+            Valider
+        </button>
+    </div>
 </mat-card>

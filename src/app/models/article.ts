@@ -1,4 +1,5 @@
 import {ArticleComment} from "./article-comment";
+import {Event} from "src/app/models/event";
 
 export class Article {
     id: string;
@@ -11,6 +12,7 @@ export class Article {
     clap: Set<string>;
     creation: Date;
     commentsCount: number;
+    eventLinked: Event;
 
     /**
      * @param id On firebase

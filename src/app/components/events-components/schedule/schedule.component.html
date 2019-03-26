@@ -1,0 +1,17 @@
+<div class="schedule">
+    <div class="header">Lundi</div>
+    <div class="header">Mardi</div>
+    <div class="header">Mercredi</div>
+    <div class="header">Jeudi</div>
+    <div class="header">Vendredi</div>
+    <div class="header">Samedi</div>
+    <div class="header">Dimanche</div>
+    <div *ngFor="let day of days" class="day">
+        <div *ngIf="eventOf(day).length === 0" class="number">
+            {{day.getUTCDate()}}
+        </div>
+        <div *ngFor="let event of eventOf(day)" class="event">
+            <app-schedule-event-item [event]="event"></app-schedule-event-item>
+        </div>
+    </div>
+</div>

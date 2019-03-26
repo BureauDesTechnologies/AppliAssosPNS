@@ -7,6 +7,9 @@ import {Article} from "../../../models/article";
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
+/**
+ * Real time component that displays all articles with asso's name corresponding
+ */
 export class HomeComponent implements OnInit {
 
     articles: Article[];

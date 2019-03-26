@@ -12,6 +12,9 @@ export class PopupService {
     constructor(private snackbar: MatSnackBar) {
     }
 
+    /**
+     * Open popup for cookies informations
+     */
     openCookiePopup() {
         this.currentPopup = this.snackbar.openFromComponent<PopupComponent>(PopupComponent, {
             duration: 600000,
@@ -23,7 +26,11 @@ export class PopupService {
         this.currentPopup.instance.validateLabel = "OK";
     }
 
-
+    /**
+     * Open custom popup
+     * @param text to display
+     * @param duration of the popup
+     */
     open(text: string, duration: number) {
         this.currentPopup = this.snackbar.openFromComponent<PopupComponent>(PopupComponent, {
             duration: duration,
@@ -33,6 +40,9 @@ export class PopupService {
         this.currentPopup.instance.text = text;
     }
 
+    /**
+     * Close current popup
+     */
     close() {
         if (this.currentPopup === null) {
             return;
