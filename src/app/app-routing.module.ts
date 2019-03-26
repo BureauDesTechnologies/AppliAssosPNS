@@ -15,6 +15,7 @@ import {LoginComponent} from "./components/user-components/login/login.component
 import {RegistrationComponent} from "./components/user-components/registration/registration.component";
 import {ProfileComponent} from "./components/user-components/profile/profile.component";
 import {HomeComponent} from "./components/articles-components/home/home.component";
+import {NotificationComponent} from './components/articles-components/notification/notification.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
     {path: "aboutAll", component: AssosOverviewComponent},
     {path: "giveRights", component: GiveRightsComponent},
     {path: "subscriptions", component: SubscribeToComponent},
+    {path: "notification", component: NotificationComponent}
 ];
 
 @NgModule({

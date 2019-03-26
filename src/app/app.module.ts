@@ -67,6 +67,8 @@ import {PublishComponent} from "./components/articles-components/publish/publish
 import {ArticleService} from "./services/article.service";
 import {UserService} from "./services/user.service";
 import {HttpClientModule} from "@angular/common/http";
+import {NotificationService} from './services/notification.service';
+import {NotificationComponent} from './components/articles-components/notification/notification.component';
 
 @NgModule({
     declarations: [
@@ -98,7 +100,8 @@ import {HttpClientModule} from "@angular/common/http";
         PopupComponent,
         DialogConfirmDeleteComponent,
         SubscribeToComponent,
-        PublishComponent
+        PublishComponent,
+        NotificationComponent
     ],
     entryComponents: [
         DialogGiveRightsComponent,
@@ -140,6 +143,7 @@ import {HttpClientModule} from "@angular/common/http";
         UserService,
         ArticleService,
         PopupService,
+        NotificationService,
         AngularFireAuth,
         MatIconRegistry,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
