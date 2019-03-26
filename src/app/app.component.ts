@@ -7,6 +7,7 @@ import {User} from "./models/user";
 import {PopupService} from "./services/popup.service";
 import {Router, RoutesRecognized} from "@angular/router";
 import {UserService} from "./services/user.service";
+import {NotificationService} from './services/notification.service';
 
 @Component({
     selector: 'app-root',
@@ -27,6 +28,7 @@ export class AppComponent {
         private platform: Platform,
         private userService: UserService,
         private popupService: PopupService,
+        private notificationService: NotificationService,
         private router: Router,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar) {
@@ -65,6 +67,9 @@ export class AppComponent {
             this.connectedUser = user;
         });
 
+      //  if(this.isLogged) {
+           // this.notificationService.getPermission(this.connectedUser);
+        //}
 
         // Open popup to inform of cookie using
         if (localStorage.getItem("knowCookies") !== 'true') {
