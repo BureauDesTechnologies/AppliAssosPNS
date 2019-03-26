@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from '../../../services/user.service';
 import {NotificationService} from '../../../services/notification.service';
+import {Notification} from '../../../models/notification';
 
 @Component({
     selector: 'notification',
@@ -9,13 +10,15 @@ import {NotificationService} from '../../../services/notification.service';
 })
 export class NotificationComponent implements OnInit {
 
-    constructor(private userService: UserService, private notificationService: NotificationService) {
-    }
-
+    notification: Notification;
     message;
 
+    constructor(private userService: UserService, private notificationService: NotificationService) {
+        this.notification = new Notification("","");
+    }
+
     async ngOnInit() {
-        this.userService.getUser('PCdpYgT9N2fCwHsVL2TYoHjg0Gk2').then( user => this.notificationService.getPermission(user));
+        this.notificationService.getPermission(null);
         this.notificationService.receiveMessage();
         this.message = this.notificationService.currentMessage;
     }

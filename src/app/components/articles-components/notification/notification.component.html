@@ -1,3 +1,19 @@
 <div>
+    <div class="firstForm">
+        <mat-form-field id="title">
+            <input [(ngModel)]="notification.title" autocomplete="off" matInput name="title" placeholder="Titre"
+                   required
+                   type="text"/>
+            <mat-error>Ce champ doit être renseigné</mat-error>
+        </mat-form-field>
+        <mat-form-field id="body">
+            <input [(ngModel)]="notification.body" autocomplete="off" matInput name="title" placeholder="Body"
+                   required
+                   type="text"/>
+            <mat-error>Ce champ doit être renseigné</mat-error>
+        </mat-form-field>
+
+
+    </div>
     <p>{{ message | async | json }}</p>
 </div>

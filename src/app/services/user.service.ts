@@ -155,12 +155,6 @@ export class UserService {
         });
     }
 
-    updateFcmToken(user: User, token: string) {
-        return this.db.collection('Users').doc(user.userId).update({
-            'fcmToken': token
-        });
-    }
-
     updateMailOfConnectedUser(mail: string) {
         const toUpdate = this.getLoggedFirebaseUser();
         return toUpdate.updateEmail(mail);
