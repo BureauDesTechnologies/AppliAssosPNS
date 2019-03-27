@@ -5,6 +5,7 @@ import 'rxjs/add/operator/take';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import {UserService} from './user.service';
 import {User} from '../models/user';
+import {Notification} from '../models/notification';
 import {AngularFirestore} from 'angularfire2/firestore';
 
 @Injectable()
@@ -16,7 +17,17 @@ export class NotificationService {
     constructor(private db: AngularFirestore) { }
 
     updateFcmToken(user: User, token: string) {
-        return this.db.collection('fcmTokens').add({'token': token});
+        return this.db.collection('fcmTokens').add({token: token});
+    }
+
+    addNotification(notification: Notification){
+        return this.db.collection('Notification').add(
+            {
+                title: notification.title,
+                body: notification.body,
+                sendBy: notification.sendBy
+            }
+        );
     }
 
     getPermission(user: User) {

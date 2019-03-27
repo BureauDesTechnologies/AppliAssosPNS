@@ -7,12 +7,22 @@
             <mat-error>Ce champ doit être renseigné</mat-error>
         </mat-form-field>
         <mat-form-field id="body">
-            <input [(ngModel)]="notification.body" autocomplete="off" matInput name="title" placeholder="Body"
+            <input [(ngModel)]="notification.body" autocomplete="off" matInput name="body" placeholder="Body"
                    required
                    type="text"/>
             <mat-error>Ce champ doit être renseigné</mat-error>
         </mat-form-field>
-
+        <mat-form-field id="sendBy">
+            <input [(ngModel)]="notification.sendBy" autocomplete="off" matInput name="sendBy" placeholder="SendBy"
+                   required
+                   type="text"/>
+            <mat-error>Ce champ doit être renseigné</mat-error>
+        </mat-form-field>
+        <div style="text-align: center">
+            <button (click)="sendNotification()" color="primary" mat-raised-button type="submit">
+                Send Notification
+            </button>
+        </div>
 
     </div>
     <p>{{ message | async | json }}</p>
