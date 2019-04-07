@@ -3,7 +3,6 @@ import {UserService} from '../../../services/user.service';
 import {NotificationService} from '../../../services/notification.service';
 import {Notification} from '../../../models/notification';
 import {MatSnackBar} from '@angular/material';
-import {Router} from '@angular/router';
 
 @Component({
     selector: 'notification',
@@ -16,11 +15,18 @@ export class NotificationComponent implements OnInit {
     message;
 
     constructor(private userService: UserService, private notificationService: NotificationService, private snackbar: MatSnackBar) {
-        this.notification = new Notification("","","");
+        this.notification = new Notification('', '', '');
     }
 
     async ngOnInit() {
-        this.notificationService.getPermission(null);
+
+        this.userService.getLoggedUser().then(
+            user =>  {
+                    if (user != null) {
+                        this.notificationService.getPermission(user);
+                    }
+                }
+            );
         this.notificationService.receiveMessage();
         this.message = this.notificationService.currentMessage;
     }

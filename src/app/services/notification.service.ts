@@ -17,7 +17,12 @@ export class NotificationService {
     constructor(private db: AngularFirestore) { }
 
     updateFcmToken(user: User, token: string) {
-        return this.db.collection('fcmTokens').add({token: token});
+
+        return this.db.collection('fcmTokens').add(
+            {
+                token: token,
+                userId: user.userId
+            });
     }
 
     addNotification(notification: Notification){
