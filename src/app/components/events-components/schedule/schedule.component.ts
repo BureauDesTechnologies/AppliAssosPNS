@@ -33,7 +33,6 @@ export class ScheduleComponent implements OnInit {
 
     eventOf(date: Date): Event[] {
         const startOfDay = date.getTime() - (date.getTime() % this.DAY_TIME);
-        const endOfDay = startOfDay + this.DAY_TIME - 1;
         const result = [];
         if ((this.events !== null && this.events !== undefined)) {
             for (let event of this.events) {
@@ -83,4 +82,13 @@ export class ScheduleComponent implements OnInit {
         }
         this.days = newDays;
     }
+
+    /**
+     * Used to get the date from index for mobile display
+     * @param index of the day in days array corresponding to days displayed on desktop
+     */
+    day(index: number): Date {
+        return this.days[index];
+    }
+
 }

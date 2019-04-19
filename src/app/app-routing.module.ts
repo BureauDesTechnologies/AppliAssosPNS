@@ -14,12 +14,11 @@ import {PublishComponent} from "./components/articles-components/publish/publish
 import {LoginComponent} from "./components/user-components/login/login.component";
 import {RegistrationComponent} from "./components/user-components/registration/registration.component";
 import {ProfileComponent} from "./components/user-components/profile/profile.component";
-import {HomeComponent} from "./components/articles-components/home/home.component";
 import {AddEventComponent} from "./components/articles-components/add-event/add-event.component";
 import {EventDetailsComponent} from "./components/events-components/event-details/event-details.component";
 
 const routes: Routes = [
-    {path: '', component: HomeComponent},
+    {path: '', component: AssosOverviewComponent},
     {path: "aboutAll", component: AssosOverviewComponent},
     {path: "bde", component: BdeComponent},
     {path: "bds", component: BdsComponent},
@@ -34,7 +33,6 @@ const routes: Routes = [
     {path: "login", component: LoginComponent},
     {path: "publish", component: PublishComponent},
     {path: "publishEvent", component: AddEventComponent},
-    {path: "aboutAll", component: AssosOverviewComponent},
     {path: "giveRights", component: GiveRightsComponent},
     {path: "subscriptions", component: SubscribeToComponent},
 ];

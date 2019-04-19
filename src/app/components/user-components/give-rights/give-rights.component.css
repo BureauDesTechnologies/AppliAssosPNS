@@ -14,5 +14,5 @@ app-users-list {
 }
 
 mat-progress-spinner {
-    display: inline-block;
+    left: calc(50% - 50px);
 }

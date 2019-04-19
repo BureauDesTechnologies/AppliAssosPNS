@@ -1,5 +1,5 @@
 <div class="scheduleWrap">
-    <div class="schedule">
+    <div class="schedule desktop">
         <div class="header">Lundi</div>
         <div class="header">Mardi</div>
         <div class="header">Mercredi</div>
@@ -16,10 +16,27 @@
             </div>
         </div>
     </div>
+    <div class="schedule">
+        <div></div>
+        <div class="dayName">Lundi</div>
+        <div class="dayName">Mardi</div>
+        <div class="dayName">Mercredi</div>
+        <div class="dayName">Jeudi</div>
+        <div class="dayName">Vendredi</div>
+        <div class="dayName">Samedi</div>
+        <div class="dayName">Dimanche</div>
+        <div class="header">{{day(0).getUTCDate() | number: '2.'}}/{{day(0).getUTCMonth() | number: '2.'}} au
+            {{day(6).getUTCDate() | number: '2.'}}/{{day(6).getUTCMonth() | number: '2.'}}</div>
+        <div *ngFor="let i of [0,1,2,3,4,5,6]" class="day">
+            <div *ngFor="let event of eventOf(day(i))" class="event">
+                <app-schedule-event-item [event]="event"></app-schedule-event-item>
+            </div>
+        </div>
+    </div>
     <div class="scheduleCommand">
-        <mat-icon (click)="previousMonth()">fast_rewind</mat-icon>
+        <mat-icon (click)="previousMonth()" class="desktop">fast_rewind</mat-icon>
         <mat-icon (click)="previousWeek()">arrow_left</mat-icon>
         <mat-icon (click)="nextWeek()">arrow_right</mat-icon>
-        <mat-icon (click)="nextMonth()">fast_forward</mat-icon>
+        <mat-icon (click)="nextMonth()" class="desktop">fast_forward</mat-icon>
     </div>
 </div>
