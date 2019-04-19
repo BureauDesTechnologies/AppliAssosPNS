@@ -1,6 +1,7 @@
 <a [routerLink]="['/event', event.id]">
     <img *ngIf="event.downloadableImageHeaderUrl !== null"
          [src]="event.downloadableImageHeaderUrl" alt="">
-    <img *ngIf="event.downloadableImageUrl !== null" [src]="event.downloadableImageUrl" alt="">
+    <img *ngIf="event.downloadableImageHeaderUrl === null && event.downloadableImageUrl !== null"
+         [src]="event.downloadableImageUrl" alt="">
     <p *ngIf="event.downloadableImageUrl === null && event.downloadableImageHeaderUrl === null">{{event.title}}</p>
 </a>
