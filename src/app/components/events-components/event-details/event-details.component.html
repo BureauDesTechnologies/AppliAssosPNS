@@ -1,0 +1,7 @@
+<div *ngIf="event !== null && event !== undefined">
+    <p>
+        {{event.title}}
+    </p>
+</div>
+<mat-progress-spinner mode="indeterminate"
+                      *ngIf="event === null || event === undefined"></mat-progress-spinner>

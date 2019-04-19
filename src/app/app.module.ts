@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import {RouteReuseStrategy} from '@angular/router';
+import {ActivatedRoute, RouteReuseStrategy} from '@angular/router';
 
 import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
@@ -75,6 +75,7 @@ import {EventService} from "./services/event.service";
 import {APP_DATE_FORMATS, AppDateAdapter} from "./utils/AppDateAdapter";
 import {ScheduleComponent} from './components/events-components/schedule/schedule.component';
 import {ScheduleEventItemComponent} from './components/events-components/schedule-event-item/schedule-event-item.component';
+import {EventDetailsComponent} from './components/events-components/event-details/event-details.component';
 
 @NgModule({
     declarations: [
@@ -108,7 +109,8 @@ import {ScheduleEventItemComponent} from './components/events-components/schedul
         SubscribeToComponent,
         PublishComponent,
         ScheduleComponent,
-        ScheduleEventItemComponent
+        ScheduleEventItemComponent,
+        EventDetailsComponent
     ],
     entryComponents: [
         DialogGiveRightsComponent,

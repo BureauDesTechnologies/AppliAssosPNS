@@ -16,6 +16,7 @@ import {RegistrationComponent} from "./components/user-components/registration/r
 import {ProfileComponent} from "./components/user-components/profile/profile.component";
 import {HomeComponent} from "./components/articles-components/home/home.component";
 import {AddEventComponent} from "./components/articles-components/add-event/add-event.component";
+import {EventDetailsComponent} from "./components/events-components/event-details/event-details.component";
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
@@ -27,7 +28,7 @@ const routes: Routes = [
     {path: "bda", component: BdaComponent},
     {path: "bdh", component: BdhComponent},
     {path: "pnc", component: PncComponent},
-    {path: 'event/:id', component: ProfileComponent},
+    {path: 'event/:id', component: EventDetailsComponent},
     {path: "profile", component: ProfileComponent},
     {path: "registration", component: RegistrationComponent},
     {path: "login", component: LoginComponent},

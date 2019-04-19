@@ -84,4 +84,16 @@ export class EventService {
         }
         return events;
     }
+
+    async getEventFromId(eventId: string): Promise<Event> {
+        let res = await firestore().collection("Events").doc(eventId).get();
+        const event: Event = Event.fromDB(res);
+        if ((event.imageUrl !== null && event.imageUrl !== undefined)) {
+            event.downloadableImageUrl = await this.getDownloadImageUrl(event);
+        }
+        if ((event.imageHeaderUrl !== null && event.imageHeaderUrl !== undefined)) {
+            event.downloadableImageHeaderUrl = await this.getDownloadImageHeaderUrl(event);
+        }
+        return event;
+    }
 }
