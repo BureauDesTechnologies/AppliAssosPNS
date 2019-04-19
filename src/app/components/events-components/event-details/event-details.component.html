@@ -36,5 +36,15 @@
 
     </mat-card-content>
 </mat-card>
+<div *ngIf="event !== null && event !== undefined && articles.length > 0" class="split">
+    <div></div>
+    <h1>Article{{articles.length > 1 ? 's' : ''}}
+        lié{{articles.length > 1 ? 's' : ''}}</h1>
+    <div></div>
+</div>
+<div *ngIf="event !== null && event !== undefined && articles.length > 0">
+    <app-article-view *ngFor="let article of articles" [article]="article">
+    </app-article-view>
+</div>
 <mat-progress-spinner mode="indeterminate"
                       *ngIf="event === null || event === undefined"></mat-progress-spinner>

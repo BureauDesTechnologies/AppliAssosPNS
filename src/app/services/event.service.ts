@@ -3,6 +3,7 @@ import {AngularFireStorage} from "angularfire2/storage";
 import {Event} from "../models/event";
 import * as firebase from "firebase";
 import {firestore} from "firebase";
+import {Article} from "../models/article";
 
 /**
  * This class contains all functions used to manage users
@@ -96,4 +97,38 @@ export class EventService {
         }
         return event;
     }
+
+    /**
+     * Retrieve all articles linked to an event
+     * @param event linked to the articles
+     */
+    async getAllArticlesOfEvent(event: Event): Promise<Article[]> {
+        const articles = [];
+        const docs = await firestore().collection('Articles')
+            .where('eventLinked', '==', firestore().collection('Events').doc(event.id))
+            .orderBy('creation', "desc")
+            .get();
+        docs.docs.forEach(async article => {
+            const art: Article = Article.fromDB(article);
+            if (art.imageUrl !== '' && (art.imageUrl !== null && art.imageUrl !== undefined)) {
+                art.downloadableImageUrl = await this.getArticleDownloadImageUrl(art);
+            }
+            articles.push(art);
+        });
+        return Promise.resolve(articles);
+    }
+
+    /**
+     * Retrieve the link of the image on a article
+     * @param article with imageUrl supplied
+     * @throws Error if article.imageUrl is null, undefined or equals ''
+     */
+    private async getArticleDownloadImageUrl(article: Article): Promise<string> {
+        if (article.imageUrl === '' || (article.imageUrl === null || article.imageUrl === undefined)) {
+            throw Error("You should not try to load download url on a article without imageUrl");
+        } else {
+            return this.st.ref(article.imageUrl).getDownloadURL().toPromise();
+        }
+    }
+
 }
