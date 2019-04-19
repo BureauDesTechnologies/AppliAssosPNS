@@ -27,7 +27,7 @@ export enum TokenType {
 @Component({
     selector: 'app-article-view',
     templateUrl: './article-view.component.html',
-    styleUrls: ['./article-view.component.css']
+    styleUrls: ['./article-view.component.scss']
 })
 /**
  * Component that displays an article and edit it

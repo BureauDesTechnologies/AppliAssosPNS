@@ -1,7 +1,11 @@
-<div *ngIf="event !== null && event !== undefined">
-    <p>
-        {{event.title}}
-    </p>
-</div>
+<mat-card *ngIf="event !== null && event !== undefined">
+    <mat-card-title>{{event.title}}</mat-card-title>
+    <mat-card-content>
+        <img *ngIf="event.downloadableImageHeaderUrl !== null && event.downloadableImageHeaderUrl !== undefined"
+             [src]="event.downloadableImageHeaderUrl" alt="Bannière" class="banner">
+        <img *ngIf="event.downloadableImageUrl !== null && event.downloadableImageUrl !== undefined"
+             [src]="event.downloadableImageUrl" alt="affiche" class="mainImg">
+    </mat-card-content>
+</mat-card>
 <mat-progress-spinner mode="indeterminate"
                       *ngIf="event === null || event === undefined"></mat-progress-spinner>

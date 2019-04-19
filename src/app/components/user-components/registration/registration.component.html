@@ -1,4 +1,4 @@
-<mat-card id="card">
+<mat-card>
     <app-file-upload (downloadableOn)="downloadableImage($event)" (uploadedOnURL)="hasUploadedPhoto($event)"
                      *ngIf="photoLink === ''"></app-file-upload>
     <form>
