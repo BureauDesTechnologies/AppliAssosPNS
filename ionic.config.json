@@ -4,5 +4,9 @@
     "cordova": {}
   },
   "type": "angular",
-  "id": "af9933b7"
+  "id": "af9933b7",
+  "config": {
+    "ionic_www_dir": "platforms/browser/www",
+    "ionic_build_dir": "platforms/browser/www"
+  }
 }

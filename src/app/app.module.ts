@@ -76,6 +76,7 @@ import {APP_DATE_FORMATS, AppDateAdapter} from "./utils/AppDateAdapter";
 import {ScheduleComponent} from './components/events-components/schedule/schedule.component';
 import {ScheduleEventItemComponent} from './components/events-components/schedule-event-item/schedule-event-item.component';
 import {EventDetailsComponent} from './components/events-components/event-details/event-details.component';
+import {ServiceWorkerModule} from '@angular/service-worker';
 
 @NgModule({
     declarations: [
@@ -145,7 +146,8 @@ import {EventDetailsComponent} from './components/events-components/event-detail
 
         HttpClientModule,
         IonicModule.forRoot(),
-        AppRoutingModule],
+        AppRoutingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})],
     providers: [
         StatusBar,
         PopupService,
