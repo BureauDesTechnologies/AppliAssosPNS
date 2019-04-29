@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {AngularFireStorage, AngularFireUploadTask} from "angularfire2/storage";
 import {tap} from "rxjs/internal/operators";
 import {Observable} from "rxjs";
+import random from "@angular-devkit/schematics/src/rules/random";
 
 @Component({
     selector: 'app-file-upload',
@@ -49,6 +50,7 @@ export class FileUploadComponent implements OnInit {
 
     // State for dropzone CSS toggling
     isHovering: boolean;
+    id: string;
 
     constructor(private storage: AngularFireStorage) {
         this.displayedTitle = 'Envoyer un fichier';
@@ -57,7 +59,15 @@ export class FileUploadComponent implements OnInit {
         this.subFolder = '';
     }
 
+    randomString(length, chars): string {
+        let result = '';
+        for (let i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+        return result;
+    }
+
+
     ngOnInit() {
+        this.id = this.randomString(32, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     }
 
     toggleHover(event: boolean) {

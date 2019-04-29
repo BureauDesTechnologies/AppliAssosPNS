@@ -45,4 +45,42 @@ export class ScheduleComponent implements OnInit {
         return result;
     }
 
+    nextWeek() {
+        let newDays: Date[] = [];
+        for (let i = 7; i < this.days.length; ++i) { //init with next weeks
+            newDays.push(this.days[i]);
+        }
+        for (let i = 0; i < 7; ++i) {
+            newDays.push(new Date(newDays[newDays.length - 1].getTime() + this.DAY_TIME))
+        }
+        this.days = newDays;
+    }
+
+    previousWeek() {
+        let newDays: Date[] = [];
+
+        for (let i = 7; i > 0; --i) {
+            newDays.push(new Date(this.days[0].getTime() - i * this.DAY_TIME))
+        }
+        for (let i = 0; i < this.days.length - 7; ++i) { //init with next weeks
+            newDays.push(this.days[i]);
+        }
+        this.days = newDays;
+    }
+
+    previousMonth() {
+        let newDays: Date[] = [];
+        for (let i = this.days.length - 1; i >= 0; --i) {
+            newDays.push(new Date(this.days[0].getTime() - this.DAY_TIME - i * this.DAY_TIME))
+        }
+        this.days = newDays;
+    }
+
+    nextMonth() {
+        let newDays: Date[] = [];
+        for (let i = 0; i < this.days.length; ++i) {
+            newDays.push(new Date(this.days[this.days.length - 1].getTime() + this.DAY_TIME + i * this.DAY_TIME))
+        }
+        this.days = newDays;
+    }
 }

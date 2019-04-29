@@ -6,7 +6,7 @@ import {MatSnackBar} from "@angular/material";
 @Component({
     selector: 'app-subscribe-to',
     templateUrl: './subscribe-to.component.html',
-    styleUrls: ['./subscribe-to.component.css']
+    styleUrls: ['./subscribe-to.component.scss']
 })
 export class SubscribeToComponent implements OnInit {
 

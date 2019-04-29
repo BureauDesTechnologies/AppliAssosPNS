@@ -8,11 +8,11 @@
     <p>{{displayedMessage}}</p>
 
     <div class="file">
-        <label class="label-file" for="file">
+        <label class="label-file" for="{{id}}">
             <mat-icon>add_photo_alternate</mat-icon>
             <!--<mat-icon>publish</mat-icon>-->
         </label>
-        <input (change)="startUpload($event.target.files)" class="input-file" id="file" type="file">
+        <input (change)="startUpload($event.target.files)" class="input-file" id="{{id}}" type="file">
     </div>
 </div>
 

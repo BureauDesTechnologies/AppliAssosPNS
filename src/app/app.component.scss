@@ -1,3 +1,5 @@
+@import "../theme/variables";
+
 //Centers content
 .mainWrapper {
   display: flex;
@@ -170,28 +172,6 @@ a:hover .logo {
   filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.55));
 }
 
-
-/*footer {
-  background: #494949;
-  text-align: center;
-  margin-left: 116px;
-  padding: 8px auto;
-}
-
-footer p {
-  margin: 4px auto;
-}
-
-footer a, footer a:visited, footer {
-  color: white;
-  text-decoration: none;
-}
-
-footer a:hover {
-  cursor: pointer;
-  text-decoration: underline;
-}*/
-
 /*region Responsive*/
 //This class is used to hide things only if the height is higher than a certain amount.
 .tooSmallHeight {
@@ -277,7 +257,7 @@ header nav.mobile mat-icon {
 
 //endregion
 
-@media (max-height: 500px) and (min-width: 735px) {
+@media (max-height: 500px) and (min-width: $sidenav-width-displayed) {
   mat-sidenav {
     display: none;
   }
@@ -300,7 +280,7 @@ header nav.mobile mat-icon {
   }
 }
 
-@media (max-width: 734px) {
+@media (max-width: $sidenav-width-hide) {
   mat-sidenav {
     display: none;
   }
@@ -313,7 +293,7 @@ header nav.mobile mat-icon {
     margin: 0;
   }
 
-  /*735px min for header too, hidePwd his content if less*/
+  /*$sidenav-width-displayed min for header too, hidePwd his content if less*/
   header nav.desktop {
     display: none;
   }
@@ -323,13 +303,13 @@ header nav.mobile mat-icon {
   }
 }
 
-@media (min-width: 735px) and (min-height: 500px) {
+@media (min-width: $sidenav-width-displayed) and (min-height: 500px) {
   mat-sidenav-content {
-    margin-left: 116px !important;
+    margin-left: $sidenav-width !important;
   }
 
   footer {
-    margin-left: 116px;
+    margin-left: $sidenav-width;
   }
 }
 

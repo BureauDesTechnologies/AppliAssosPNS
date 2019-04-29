@@ -1,0 +1,53 @@
+@import "../../../../theme/styles";
+
+mat-progress-spinner {
+  left: calc(50% - 50px);
+}
+
+mat-card {
+  max-width: 800px;
+  margin: 8px auto;
+  @media (max-width: 800px + $sidenav-width) {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+
+  @media (max-width: $sidenav-width-displayed) {
+    margin: 0;
+  }
+
+  mat-card-content {
+
+
+    img:not(.banner) {
+      max-width: 245px;
+      max-height: 350px;
+      float: left;
+      margin-right: 5px;
+      margin-bottom: 5px;
+    }
+
+    img.banner {
+      max-width: unset;
+    }
+
+    .mainContent {
+      overflow: auto;
+
+      .text {
+        h1 {
+          margin: 0;
+        }
+
+        h2 {
+          font-size: 20px;
+          color: rgba(0, 0, 0, 0.54);
+        }
+
+        p {
+          text-align: justify;
+        }
+      }
+    }
+  }
+}

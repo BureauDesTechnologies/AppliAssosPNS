@@ -112,7 +112,7 @@
                              [subFolder]="'eventImages'"></app-file-upload>
             <img *ngIf="imageToDisplay !== ''" [src]="imageToDisplay" alt="">
             <app-file-upload (downloadableOn)="headerToDisplay = $event"
-                             (uploadedOnURL)="event.imageUrl = $event"
+                             (uploadedOnURL)="event.imageHeaderUrl = $event"
                              *ngIf="headerToDisplay ===''"
                              [displayedTitle]="'Ajouter une bannière'"
                              [expectedType]="'image'"

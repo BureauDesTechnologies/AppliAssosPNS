@@ -1,0 +1,40 @@
+<mat-card *ngIf="event !== null && event !== undefined">
+    <mat-card-title
+            *ngIf="event.downloadableImageHeaderUrl === null
+            || event.downloadableImageHeaderUrl === undefined">{{event.title}}</mat-card-title>
+
+    <mat-card-subtitle
+            *ngIf="event.downloadableImageHeaderUrl === null
+            || event.downloadableImageHeaderUrl === undefined">
+        <span>Le {{event.startDate | date: 'dd/MM'}} dès {{event.startDate | date: 'HH:mm'}}</span>
+        <span *ngIf="event.endDate !== null">
+                    jusqu'{{event.startDate.getDay() === event.endDate.getDay() ? 'à ' + (event.endDate | date: 'HH:mm')
+            : 'au ' + (event.endDate | date: 'dd/MM') + ' à ' + (event.endDate | date: 'HH:mm')}}</span>
+    </mat-card-subtitle>
+
+    <mat-card-content>
+        <img *ngIf="event.downloadableImageHeaderUrl !== null && event.downloadableImageHeaderUrl !== undefined"
+             mat-card-image
+             [src]="event.downloadableImageHeaderUrl" alt="Bannière" class="banner">
+        <div class="mainContent">
+            <img *ngIf="event.downloadableImageUrl !== null && event.downloadableImageUrl !== undefined"
+                 [src]="event.downloadableImageUrl" alt="affiche" class="mainImg">
+            <div class="text">
+                <h1 *ngIf="event.downloadableImageHeaderUrl !== null && event.downloadableImageHeaderUrl !== undefined">
+                    {{event.title}}
+                </h1>
+                <h2 *ngIf="event.downloadableImageHeaderUrl !== null && event.downloadableImageHeaderUrl !== undefined">
+                    <span>Le {{event.startDate | date: 'dd/MM'}} dès {{event.startDate | date: 'HH:mm'}}</span>
+                    <span *ngIf="event.endDate !== null">
+                    jusqu'{{event.startDate.getDay() === event.endDate.getDay() ? 'à ' + (event.endDate | date: 'HH:mm')
+                        : 'au ' + (event.endDate | date: 'dd/MM') + ' à ' + (event.endDate | date: 'HH:mm')}}</span>
+                </h2>
+                <p>{{event.content}}</p>
+            </div>
+        </div>
+
+
+    </mat-card-content>
+</mat-card>
+<mat-progress-spinner mode="indeterminate"
+                      *ngIf="event === null || event === undefined"></mat-progress-spinner>
