@@ -76,4 +76,9 @@ export class AppComponent {
     disconnect() {
         this.userService.disconnectUser();
     }
+
+    getPadding() {
+        return this.platform.is('mobileweb') && !this.platform.is('pwa')
+            ? {'padding-bottom': '50px'} : {};
+    }
 }

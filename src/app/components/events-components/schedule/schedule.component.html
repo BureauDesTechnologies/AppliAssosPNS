@@ -14,6 +14,7 @@
             <div *ngFor="let event of eventOf(day)" class="event">
                 <app-schedule-event-item [event]="event"></app-schedule-event-item>
             </div>
+            <div *ngIf="eventOf(day).length > 0" class="shadowSeeMore"></div>
         </div>
     </div>
     <div class="schedule">
@@ -28,9 +29,13 @@
         <div class="header">{{day(0).getUTCDate() | number: '2.'}}/{{day(0).getUTCMonth() | number: '2.'}} au
             {{day(6).getUTCDate() | number: '2.'}}/{{day(6).getUTCMonth() | number: '2.'}}</div>
         <div *ngFor="let i of [0,1,2,3,4,5,6]" class="day">
+            <div *ngIf="eventOf(day(i)).length === 0" class="number">
+                {{day(i).getUTCDate()}}
+            </div>
             <div *ngFor="let event of eventOf(day(i))" class="event">
                 <app-schedule-event-item [event]="event"></app-schedule-event-item>
             </div>
+            <div *ngIf="eventOf(day(i)).length > 0" class="shadowSeeMore"></div>
         </div>
     </div>
     <div class="scheduleCommand">

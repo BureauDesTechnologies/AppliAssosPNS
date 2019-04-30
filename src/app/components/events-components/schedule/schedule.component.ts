@@ -29,6 +29,7 @@ export class ScheduleComponent implements OnInit {
             this.days.push(new Date(startWeek.getTime() + i * this.DAY_TIME))
         }
         this.events = await this.eventService.getAll();
+        // this.events = [new Event("Titre", "Description de l'évenement pour que les gens comprenne de quoi il s'agit et vienne à ce super event de la mort qui tue tout. Mais bon, là c'est surtout une description loongue comme la mort pour permettre de verifier l'affichage", "Bureau des Élèves", new Date('05/02/2019 15:20'), null, "", "")];
     }
 
     eventOf(date: Date): Event[] {

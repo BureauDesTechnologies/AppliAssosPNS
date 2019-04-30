@@ -1,7 +1,17 @@
 <a [routerLink]="['/event', event.id]">
-    <img *ngIf="event.downloadableImageHeaderUrl !== null"
-         [src]="event.downloadableImageHeaderUrl" alt="">
-    <img *ngIf="event.downloadableImageHeaderUrl === null && event.downloadableImageUrl !== null"
-         [src]="event.downloadableImageUrl" alt="">
-    <p *ngIf="event.downloadableImageUrl === null && event.downloadableImageHeaderUrl === null">{{event.title}}</p>
+    <mat-card>
+        <mat-card-title>
+            <img [src]="getAssoLogo()" alt="" mat-card-avatar>
+            {{event.title}}
+        </mat-card-title>
+        <mat-card-content>
+            <p class="desktop">{{shorten(event.content, 80)}}</p>
+            <p class="mobile">{{shorten(event.content, 200)}}</p>
+        </mat-card-content>
+    </mat-card>
+    <!--<img *ngIf="event.downloadableImageHeaderUrl !== null"-->
+    <!--[src]="event.downloadableImageHeaderUrl" alt="">-->
+    <!--<img *ngIf="event.downloadableImageHeaderUrl === null && event.downloadableImageUrl !== null"-->
+    <!--[src]="event.downloadableImageUrl" alt="">-->
+    <!--<p *ngIf="event.downloadableImageUrl === null && event.downloadableImageHeaderUrl === null">{{event.title}}</p>-->
 </a>

@@ -205,7 +205,7 @@
                     </a>
                 </div>
             </mat-sidenav>
-            <mat-sidenav-content>
+            <mat-sidenav-content [ngStyle]="getPadding()">
                 <router-outlet></router-outlet>
             </mat-sidenav-content>
         </mat-sidenav-container>

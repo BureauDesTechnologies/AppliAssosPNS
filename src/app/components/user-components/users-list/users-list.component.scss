@@ -101,3 +101,7 @@ mat-card-subtitle {
 mat-icon {
   cursor: pointer;
 }
+
+mat-progress-spinner {
+  left: calc(50% - 50px);
+}

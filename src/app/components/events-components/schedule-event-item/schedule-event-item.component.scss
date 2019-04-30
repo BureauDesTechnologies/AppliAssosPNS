@@ -1,0 +1,48 @@
+a, a:hover, a:visited, a:active {
+  text-decoration: none;
+}
+
+mat-card {
+  width: calc(100% - 4px);
+  margin: 2px;
+  padding: 8px;
+
+  &:hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
+  mat-card-title {
+    font-size: 16px;
+    margin-bottom: 4px;
+
+    img {
+      border-radius: 0;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  mat-card-content {
+    font-size: 12px;
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.desktop {
+  @media (max-width: 600px) {
+    display: none !important;
+  }
+}
+
+.mobile {
+  display: none;
+  @media (max-width: 600px) {
+    display: inherit !important;
+  }
+}
